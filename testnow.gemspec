@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
 	s.name			=	'testnow'
-	s.version		=	'0.1'
+	s.version		=	'0.0.1'
 	s.date			=	'2016-03-25'
 	s.summary		=	'TestNow helper'
 	s.description	=	'A simple gem for TestNow'
