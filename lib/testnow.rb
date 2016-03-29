@@ -1,3 +1,7 @@
+require 'selenium-webdriver'
+require 'testnow/chrome'
+require 'testnow/opera'
+
 module TestNow
 
 	def init
@@ -8,7 +12,7 @@ module TestNow
     		when "android"
       			launch_driver_android
     		when "opera"
-      			launch_driver_opera
+      			TestNow.launch_driver_opera
     		when "androidchrome"
       			launch_driver_android_chrome  
     		when "ie"
