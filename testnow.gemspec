@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 	s.email				=	'kushrupani@live.com'
 	s.files				=	Dir["lib/*.rb"] + Dir["lib/*/*.rb"] + Dir["data/*.xpi"] + %w(README.md LICENCE)
   s.test_files  = `git ls-files -- {spec,features}/*`.split("\n")
-  s.executable  = [`git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }]
+  s.executable  = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
 	s.homepage		=	"https://github.com/krupani/testnow"
 	s.license			= 	'MIT'
 	s.add_dependency('selenium-webdriver')
