@@ -1,5 +1,6 @@
 module TestNow
 
+
 	#Opera browser
 	def launch_driver_opera
 	  client = Selenium::WebDriver::Remote::Http::Default.new
@@ -24,6 +25,5 @@ module TestNow
 			else
 				return "/usr/bin/opera"
 		end
-
 	end
 end

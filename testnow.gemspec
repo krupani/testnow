@@ -1,12 +1,12 @@
 Gem::Specification.new do |s|
 	s.name				=	'testnow'
-	s.version			=	'0.0.2'
-	s.date				=	'2016-03-25'
+	s.version			=	'0.0.3'
+	s.date				=	'2016-04-14'
 	s.summary			=	'TestNow helper'
-	s.description		=	'A simple gem for TestNow'
+	s.description		=	'A gem to configure your Ruby Selenium suite for TestNow'
 	s.authors			=	["Kaushal Rupani"]
 	s.email				=	'kushrupani@live.com'
-	s.files				=	["lib/testnow.rb", "lib/testnow/chrome.rb","lib/testnow/opera.rb"]
+	s.files				=	Dir["lib/*.rb"] + Dir["lib/*/*.rb"] + Dir["spec/*.rb"] + Dir["spec/*/*.rb"] + Dir["data/*.xpi"] + %w(README.md LICENCE)
 	s.homepage			=	"https://github.com/krupani/testnow"
 	s.license			= 	'MIT'
 	s.add_dependency('selenium-webdriver')

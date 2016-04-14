@@ -1,6 +1,7 @@
 require 'selenium-webdriver'
 require 'testnow/chrome'
 require 'testnow/opera'
+require 'testnow/firefox'
 
 module TestNow
 
@@ -18,7 +19,7 @@ module TestNow
     		when "ie"
       			launch_driver_ie
     		else
-      			launch_driver_firefox
+      			TestNow.launch_driver_firefox
   		end
 	end
 
