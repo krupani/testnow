@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+require 'testnow/version'
+
+@root_dir = (FileUtils.pwd)
+@feature_dir = File.join(@root_dir,'features')
+@scenario_dir = File.join(@feature_dir, 'scenarios')
+@steps_dir = File.join(@feature_dir,'step_definition')
+@page_dir = File.join(@feature_dir, 'pages')
+@support_dir = File.join(@feature_dir,'support')
+@report_dir = File.join(@root_dir, 'reports')
+
+def cucumber_showtime
+  p @root_dir
+  p @feature_dir
+  p @scenario_dir
+  p @steps_dir
+  p @page_dir
+  p @support_dir
+  p @report_dir
+end
+
+
+if ARGV.length == 0
+  print_usage
+else
+  cmd = ARGV.shift
+  if cmd == 'help'
+    print_help
+  elsif cmd == 'cucumber_showtime'
+    cucumber_showtime
+  elsif cmd == 'version'
+    puts TestNow::VERSION
+  else
+    print_usage
+  end
+end
