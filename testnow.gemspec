@@ -7,9 +7,9 @@ Gem::Specification.new do |s|
 	s.description		=	'A gem to configure your Ruby Selenium suite for TestNow'
 	s.authors			=	["Kaushal Rupani"]
 	s.email				=	'kushrupani@live.com'
-	s.files				=	Dir["lib/*.rb"] + Dir["lib/*/*.rb"] + Dir["data/*.xpi"] + %w(README.md LICENCE)
+	s.files				=	Dir["lib/*.rb"] + Dir["lib/*/*.rb"] + Dir["data/*.xpi"] + Dir["data/*/*"] + %w(README.md LICENCE)
   s.test_files  = `git ls-files -- {spec,features}/*`.split("\n")
-  s.executable  = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.executables  = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
 	s.homepage		=	"https://github.com/krupani/testnow"
 	s.license			= 	'MIT'
 	s.add_dependency('selenium-webdriver')

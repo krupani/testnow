@@ -1,24 +1,32 @@
 #!/usr/bin/env ruby
 
 require 'fileutils'
-require 'testnow/version'
 
-@root_dir = (FileUtils.pwd)
+@root_dir = File.join(FileUtils.pwd, "cucumber_showtime")
 @feature_dir = File.join(@root_dir,'features')
 @scenario_dir = File.join(@feature_dir, 'scenarios')
 @steps_dir = File.join(@feature_dir,'step_definition')
 @page_dir = File.join(@feature_dir, 'pages')
 @support_dir = File.join(@feature_dir,'support')
 @report_dir = File.join(@root_dir, 'reports')
+@showtime_dir = File.join(File.dirname(__FILE__) + "/../data/showtime")
 
 def cucumber_showtime
-  p @root_dir
-  p @feature_dir
-  p @scenario_dir
-  p @steps_dir
-  p @page_dir
-  p @support_dir
-  p @report_dir
+  FileUtils.makedirs(@root_dir)
+  FileUtils.makedirs(@feature_dir)
+  FileUtils.makedirs(@scenario_dir)
+  FileUtils.makedirs(@steps_dir)
+  FileUtils.makedirs(@page_dir)
+  FileUtils.makedirs(@support_dir)
+  FileUtils.makedirs(@report_dir)
+
+  FileUtils.copy(@showtime_dir+"/hooks.rb", @support_dir)
+  FileUtils.copy(@showtime_dir+"/env.rb", @support_dir)
+  FileUtils.copy(@showtime_dir+"/github_steps.rb", @steps_dir)
+  FileUtils.copy(@showtime_dir+"/github.feature", @scenario_dir)
+  FileUtils.copy(@showtime_dir+"/github_page.rb", @page_dir)
+  FileUtils.copy(@showtime_dir+"/Gemfile", @root_dir)
+  FileUtils.copy(@showtime_dir+"/cucumber.yml", @root_dir)
 end
 
 
@@ -31,7 +39,7 @@ else
   elsif cmd == 'cucumber_showtime'
     cucumber_showtime
   elsif cmd == 'version'
-    puts TestNow::VERSION
+    puts File.read(File.expand_path("../../lib/testnow/version", __FILE__))
   else
     print_usage
   end
