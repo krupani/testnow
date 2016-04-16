@@ -2,7 +2,7 @@
 
 require 'fileutils'
 
-@root_dir = File.join(FileUtils.pwd, "cucumber_showtime")
+@root_dir = File.join(FileUtils.pwd, "cucumber_now")
 @feature_dir = File.join(@root_dir,'features')
 @scenario_dir = File.join(@feature_dir, 'scenarios')
 @steps_dir = File.join(@feature_dir,'step_definition')
@@ -11,33 +11,116 @@ require 'fileutils'
 @report_dir = File.join(@root_dir, 'reports')
 @showtime_dir = File.join(File.dirname(__FILE__) + "/../data/showtime")
 
-def cucumber_showtime
+def cucumber_now
+  if File.exist?(@root_dir)
+    print 'There is already cucumber_now directory. Either delete it or try running the command from some other directory.'
+    exit 1
+  end
+  puts "\n"+"*"*70
+  puts "*  TestNow is creating a WebDriver-Ruby-Cucumber framework for you.  *"
+  puts "*"*70
+
+  print "Creating project directory."
   FileUtils.makedirs(@root_dir)
+
+  print "Creating features directory."
   FileUtils.makedirs(@feature_dir)
+
+  print "Creating the scenarios directory to contain the feature files."
   FileUtils.makedirs(@scenario_dir)
+
+  print "Creating the steps directory to contain the step definition files"
   FileUtils.makedirs(@steps_dir)
+
+  print "Creating the page directory just in case if you want to use page object pattern."
   FileUtils.makedirs(@page_dir)
+
+  print "Creating a support directory which will contain all the configs"
   FileUtils.makedirs(@support_dir)
+
+  print "Creating the reports directory where the reports will be save after execution."
   FileUtils.makedirs(@report_dir)
 
+  print "Creating config files..."
+  print "1. hooks.rb -- used for setup and teardown purpose."
   FileUtils.copy(@showtime_dir+"/hooks.rb", @support_dir)
+  print "2. env.rb -- used as cucumber config"
   FileUtils.copy(@showtime_dir+"/env.rb", @support_dir)
-  FileUtils.copy(@showtime_dir+"/github_steps.rb", @steps_dir)
+
+  print "Creating feature file inside scenarios directory."
   FileUtils.copy(@showtime_dir+"/github.feature", @scenario_dir)
+
+  print "Creating step definition file inside the steps directory"
+  FileUtils.copy(@showtime_dir+"/github_steps.rb", @steps_dir)
+
+  print "Creating page class file inside the page directory."
   FileUtils.copy(@showtime_dir+"/github_page.rb", @page_dir)
+
+  print "Creating Gemfile -- used to contain all required gems information."
   FileUtils.copy(@showtime_dir+"/Gemfile", @root_dir)
+
+  print "Creating cucumber.yml -- used to provide cucumber options"
   FileUtils.copy(@showtime_dir+"/cucumber.yml", @root_dir)
+
+  puts "\n"+"*"*97
+  puts "*  TestNow completed framework creation. A sample scenario is also created for your reference.  *"
+  puts "*"*97
+
+  puts "\n Would you like to continue with dependency(gems) installation? (Y/n)"
+  ans=gets
+  if ans.chomp.downcase == "y"
+    print "TestNow is installing gems using bundler. Please wait till process completed."
+    system('gem install bundler')
+    system('bundle install --gemfile=$(pwd)/cucumber_now/Gemfile')
+    print "Dependency installation completed successfully.\n"
+  else
+    exit 1
+  end
+
+  puts "\n"+"*"*80
+  puts "*  Congratulations!!! Your WenDriver-Ruby-Cucumber framework is ready to use.  *"
+  puts "*"*80
+
 end
 
+def print(msg)
+  puts "\n"
+  puts "=>=>=>=>=> " + msg
+  sleep 1
+end
+
+def print_help
+  puts <<MSG
+
+  Usage: testnow <command-name>
+
+  <command-name> can be one of
+    help
+    cucumber_now
+    version
+
+
+    Command descriptions  :
+      help                : Prints help information in detail.
+
+      cucumber_now        : Creates a framework for cross browser testing. This framework acts
+                            as a sketon to add more features for your respective project.
+                            This framework is compatible with the TestNow platform and also
+                            can be used locally.
+
+      version             : Prints the gem version
+
+MSG
+end
 
 if ARGV.length == 0
-  print_usage
+  print_help
 else
   cmd = ARGV.shift
   if cmd == 'help'
     print_help
-  elsif cmd == 'cucumber_showtime'
-    cucumber_showtime
+  elsif cmd == 'cucumber_now'
+    cucumber_now
   elsif cmd == 'version'
     puts File.read(File.expand_path("../../lib/testnow/version", __FILE__))
   else
