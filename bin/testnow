@@ -62,6 +62,9 @@ def cucumber_now
   print "Creating cucumber.yml -- used to provide cucumber options"
   FileUtils.copy(@showtime_dir+"/cucumber.yml", @root_dir)
 
+  print "Creating Rakefile -- used to write automation execution tasks."
+  FileUtils.copy(@showtime_dir+"/Rakefile", @root_dir)
+
   puts "\n"+"*"*97
   puts "*  TestNow completed framework creation. A sample scenario is also created for your reference.  *"
   puts "*"*97
@@ -120,7 +123,7 @@ def rspec_now
   print "Creating Gemfile -- used to contain all required gems information."
   FileUtils.copy(@showtime_dir+"/Gemfile", @root_dir)
 
-  print "Creating Rakefile -- used to create automation execution tasks."
+  print "Creating Rakefile -- used to write automation execution tasks."
   FileUtils.copy(@showtime_dir+"/Rakefile_rspec", @root_dir+"/Rakefile")
 
   print "Creating spec file inside the scenarios directory."
@@ -145,7 +148,7 @@ def rspec_now
   puts "*    To run the sample reference test, please cd into rspec_now directory   *"
   puts "*         and run the command 'rake rspec_now'.  Enjoy the show!!!          *"
   puts "*    A beautiful descriptive report will be created in reports directory.   *"
-  puts "*                          !!! HAPPY AUTOMATION !!!                         *"
+  puts "*                        !!! HAPPY AUTOMATION !!!                           *"
   puts "*"*77+"\n"
 
 end
