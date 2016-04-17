@@ -11,13 +11,13 @@ module TestNow
     		when "chrome"
       			TestNow.launch_driver_chrome
     		when "android"
-      			launch_driver_android
+      			TestNow.launch_driver_android
     		when "opera"
       			TestNow.launch_driver_opera
     		when "androidchrome"
-      			launch_driver_android_chrome  
+      			TestNow.launch_driver_android_chrome
     		when "ie"
-      			launch_driver_ie
+      			TestNow.launch_driver_ie
     		else
       			TestNow.launch_driver_firefox
   		end
