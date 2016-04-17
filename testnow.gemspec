@@ -2,8 +2,8 @@
 Gem::Specification.new do |s|
 	s.name				=	'testnow'
 	s.version			=	File.read(File.expand_path("../lib/testnow/version", __FILE__))
-	s.date				=	'2016-04-16'
-	s.summary			=	'TestNow helper'
+	s.platform    = Gem::Platform::RUBY
+	s.summary			=	'TestNow gem : Automate in a BDD + Cross Browser style'
 	s.description	=	'A gem to configure your WebDriver-Ruby automation suite for TestNow and local'
 	s.authors			=	["Kaushal Rupani"]
 	s.email				=	'kushrupani@live.com'

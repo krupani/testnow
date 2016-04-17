@@ -143,7 +143,7 @@ def rspec_now
   puts "\n"+"*"*77
   puts "*  Congratulations!!! Your WenDriver-Ruby-RSpec framework is ready to use.  *"
   puts "*    To run the sample reference test, please cd into rspec_now directory   *"
-  puts "*                   and run the command 'rake rspec_now'                    *"
+  puts "*         and run the command 'rake rspec_now'.  Enjoy the show!!!          *"
   puts "*    A beautiful descriptive report will be created in reports directory.   *"
   puts "*                          !!! HAPPY AUTOMATION !!!                         *"
   puts "*"*77+"\n"
