@@ -2,16 +2,17 @@
 
 require 'fileutils'
 
-@root_dir = File.join(FileUtils.pwd, "cucumber_now")
-@feature_dir = File.join(@root_dir,'features')
-@scenario_dir = File.join(@feature_dir, 'scenarios')
-@steps_dir = File.join(@feature_dir,'step_definition')
-@page_dir = File.join(@feature_dir, 'pages')
-@support_dir = File.join(@feature_dir,'support')
-@report_dir = File.join(@root_dir, 'reports')
 @showtime_dir = File.join(File.dirname(__FILE__) + "/../data/showtime")
 
 def cucumber_now
+  @root_dir = File.join(FileUtils.pwd, "cucumber_now")
+  @feature_dir = File.join(@root_dir,'features')
+  @scenario_dir = File.join(@feature_dir, 'scenarios')
+  @steps_dir = File.join(@feature_dir,'step_definition')
+  @page_dir = File.join(@feature_dir, 'pages')
+  @support_dir = File.join(@feature_dir,'support')
+  @report_dir = File.join(@root_dir, 'reports')
+
   if File.exist?(@root_dir)
     print 'There is already cucumber_now directory. Either delete it or try running the command from some other directory.'
     exit 1
@@ -41,10 +42,9 @@ def cucumber_now
   print "Creating the reports directory where the reports will be save after execution."
   FileUtils.makedirs(@report_dir)
 
-  print "Creating config files..."
-  print "1. hooks.rb -- used for setup and teardown purpose."
+  print "Creating config files -- hooks.rb -- used for setup and teardown purpose."
   FileUtils.copy(@showtime_dir+"/hooks.rb", @support_dir)
-  print "2. env.rb -- used as cucumber config"
+  print "Creating config files -- env.rb -- used as cucumber config"
   FileUtils.copy(@showtime_dir+"/env.rb", @support_dir)
 
   print "Creating feature file inside scenarios directory."
@@ -66,22 +66,90 @@ def cucumber_now
   puts "*  TestNow completed framework creation. A sample scenario is also created for your reference.  *"
   puts "*"*97
 
-  puts "\n Would you like to continue with dependency(gems) installation? (Y/n)"
+  puts "\n Would you like to continue with dependency(gems) installation? (Y/n) :"
   ans=gets
   if ans.chomp.downcase == "y"
     print "TestNow is installing gems using bundler. Please wait till process completed."
-    system('gem install bundler')
     system('bundle install --gemfile=$(pwd)/cucumber_now/Gemfile')
     print "Dependency installation completed successfully.\n"
   else
+    print "You can do this later also. Just cd into cucumber_now directory and run 'bundle install'\n"
     exit 1
   end
 
   puts "\n"+"*"*80
   puts "*  Congratulations!!! Your WenDriver-Ruby-Cucumber framework is ready to use.  *"
-  puts "*"*80
+  puts "*    To run the sample reference test, please cd into cucumber_now directory   *"
+  puts "*       and run the command 'cucumber features' or 'rake cucumber_now'         *"
+  puts "* A beautiful screenshot embedded report will be created in reports directory. *"
+  puts "*                            !!! HAPPY AUTOMATION !!!                          *"
+  puts "*"*80+"\n"
 
 end
+
+
+def rspec_now
+  @root_dir = File.join(FileUtils.pwd, "rspec_now")
+  @spec_dir = File.join(@root_dir, "spec")
+  @scenario_dir = File.join(@spec_dir, "scenarios")
+  @pages_dir = File.join(@root_dir, "pages")
+
+  if File.exist?(@root_dir)
+    print 'There is already rspec_now directory. Either delete it or try running the command from some other directory.'
+    exit 1
+  end
+  puts "\n"+"*"*67
+  puts "*  TestNow is creating a WebDriver-Ruby-RSpec framework for you.  *"
+  puts "*"*67
+
+  print "Creating project directory."
+  FileUtils.makedirs(@root_dir)
+
+  print "Creating spec directory."
+  FileUtils.makedirs(@spec_dir)
+
+  print "Creating the scenarios directory to contain the spec files."
+  FileUtils.makedirs(@scenario_dir)
+
+  print "Creating the page directory just in case if you want to use page object pattern."
+  FileUtils.makedirs(@pages_dir)
+
+  print "Creating config file -- spec_helper.rb -- used for dependency declaration and global setup-teardown"
+  FileUtils.copy(@showtime_dir+"/spec_helper.rb", @spec_dir)
+
+  print "Creating Gemfile -- used to contain all required gems information."
+  FileUtils.copy(@showtime_dir+"/Gemfile", @root_dir)
+
+  print "Creating Rakefile -- used to create automation execution tasks."
+  FileUtils.copy(@showtime_dir+"/Rakefile_rspec", @root_dir+"/Rakefile")
+
+  print "Creating spec file inside the scenarios directory."
+  FileUtils.copy(@showtime_dir+"/github_spec.rb", @scenario_dir)
+
+  print "Creating page class file inside the pages directory."
+  FileUtils.copy(@showtime_dir+"/github_page.rb", @pages_dir)
+
+  puts "\n Would you like to continue with dependency(gems) installation? (Y/n) :"
+  ans=gets
+  if ans.chomp.downcase == "y"
+    print "TestNow is installing gems using bundler. Please wait till process completed."
+    system('bundle install --gemfile=$(pwd)/rspec_now/Gemfile')
+    print "Dependency installation completed successfully.\n"
+  else
+    print "You can do this later. Just cd into rspec_now directory and run 'bundle install'\n"
+    exit 1
+  end
+
+  puts "\n"+"*"*77
+  puts "*  Congratulations!!! Your WenDriver-Ruby-RSpec framework is ready to use.  *"
+  puts "*    To run the sample reference test, please cd into rspec_now directory   *"
+  puts "*                   and run the command 'rake rspec_now'                    *"
+  puts "*    A beautiful descriptive report will be created in reports directory.   *"
+  puts "*                          !!! HAPPY AUTOMATION !!!                         *"
+  puts "*"*77+"\n"
+
+end
+
 
 def print(msg)
   puts "\n"
@@ -97,16 +165,22 @@ def print_help
   <command-name> can be one of
     help
     cucumber_now
+    rspec_now
     version
 
 
     Command descriptions  :
       help                : Prints help information in detail.
 
-      cucumber_now        : Creates a framework for cross browser testing. This framework acts
-                            as a sketon to add more features for your respective project.
-                            This framework is compatible with the TestNow platform and also
-                            can be used locally.
+      cucumber_now        : Creates a WebDriver-Ruby-Cucumber skeleton framework for cross
+                            browser automation testing. Also creates a sample scenario for
+                            reference which can be used to add more features(tests). This
+                            framework is compatible with TestNow platform.
+
+      rspec_now           : Creates a WebDriver-Ruby-RSpec skeleton framework for cross
+                            browser automation testing. Also creates a sample scenario for
+                            reference which can be used to add more specs(tests). This
+                            framework is compatible with TestNow platform.
 
       version             : Prints the gem version
 
@@ -121,9 +195,11 @@ else
     print_help
   elsif cmd == 'cucumber_now'
     cucumber_now
+  elsif cmd == 'rspec_now'
+    rspec_now
   elsif cmd == 'version'
     puts File.read(File.expand_path("../../lib/testnow/version", __FILE__))
   else
-    print_usage
+    print_help
   end
 end

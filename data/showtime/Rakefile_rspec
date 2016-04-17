@@ -1,0 +1,7 @@
+require 'rake'
+require 'rspec/core/rake_task'
+
+RSpec::Core::RakeTask.new("rspec_now") do |role|
+  role.pattern="spec/scenarios/*_spec.rb"
+  role.rspec_opts = ["--format", "html", "--out", "reports/github.html"]
+end
