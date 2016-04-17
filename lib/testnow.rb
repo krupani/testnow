@@ -2,6 +2,9 @@ require 'selenium-webdriver'
 require 'testnow/chrome'
 require 'testnow/opera'
 require 'testnow/firefox'
+require 'testnow/android'
+require 'testnow/android_chrome'
+require 'testnow/internet_explorer'
 
 module TestNow
 
