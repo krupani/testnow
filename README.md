@@ -1,6 +1,6 @@
 # testnow
 
-An instant WebDriver-Ruby-Cucumber or WebDriver-Ruby-RSpec framework which has ability to do cross browser testing on any of the popular browsers, Firefox, Chrome, Opera, Internet Explorer, Safari, Android Browser. It uses the selenium-webdriver to driver the browsers already installed on your box. This gem also makes your existing automation code compatible to the TestNow platform by adding 1 command in your existing setup method.
+An instant WebDriver-Ruby-Cucumber or WebDriver-Ruby-RSpec framework which has ability to do cross browser testing on any of the popular browsers, Firefox, Chrome, Opera, Internet Explorer, Safari, Android Browser. It uses the selenium-webdriver to driver the browsers already installed on your box. This gem also makes your existing automation code compatible to the [TestNow platform](https://testnow.opexsoftware.com) by [Opex Software](https://opexsoftware.com) by adding just 1 line of code your existing setup(Before) method.
 
 ## Installation 
 You must have Ruby installed before you can install this gem.
@@ -19,7 +19,7 @@ gem 'testnow'
 ## Usage   
    
 ### 1. Instant Cross Browser Configuration -- TestNow Platform Compatibility     
-When creating a Selenium-WebDriver automation suite, if one requires cross browser testing, the biggest headache is configuring all browsers mainly because configurations for every browser is done differently. It is . This is where TestNow gem jumps in as an Asprin.   
+When creating a Selenium-WebDriver automation suite, if one requires cross browser testing, the biggest headache is configuring all browsers mainly because configurations for every browser is done differently. This is where TestNow gem jumps in as an Asprin to cure your headache by taking care of all browser configurations.   
 
 Unlike some very famous Ruby-WebDriver tools which wraps up the WebDriver object and provides its own set of commands, TestNow gem returns you the ```driver``` object as is but initialized with any browser of your choice.
 
@@ -66,3 +66,6 @@ rake rspec_now        # Executes using cucumber rake task
   
 Use any of the command to execute the sample spec. A beautiful report will be created by this execution to in the reports directory. It will be in html format, please double click or open in a browser to view it. 
 
+
+## Contributing
+Ideas and suggestions are always always most welcome. Please fork this gem code and feel free to add any updates, suggestions etc and create a pull request. 
