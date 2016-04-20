@@ -5,9 +5,12 @@ module TestNow
     ENV['IS_UPA'] = "false" if ENV['IS_UPA'].nil?
     if ENV['IS_UPA']=="true"
       ENV['HAR_DIR'] = get_tmp_dir if ENV['HAR_DIR'].nil?
+      puts "=>=>=>  Your HAR (UPA) files will be created here : #{ENV['HAR_DIR']}"
+      firebug = File.absolute_path(File.dirname(__FILE__)+"/../../data/firebug-2.0.13.xpi")
+      net_export = File.absolute_path(File.dirname(__FILE__)+"/../../data/netExport-0.8.xpi")
       profile = Selenium::WebDriver::Firefox::Profile.new
-      profile.add_extension("./data/firebug-2.0.13.xpi")
-      profile.add_extension("./data/netExport-0.8.xpi")
+      profile.add_extension(firebug)
+      profile.add_extension(net_export)
       profile['extensions.firebug.currentVersion'] = "2.0.13"
       profile['extensions.firebug.allPagesActivation'] = "on"
       profile['extensions.firebug.defaultPanelName'] = "net"
