@@ -59,7 +59,7 @@ testnow rspec_now
 This will run a series of commands and create a WebDriver-Ruby-RSpec framework for you in a directory called __rspec_now__. It will towards the end also ask you for gem dependency installation and it is highly recommended to say Yes. It will also create a sample scenario with a spec and spec_helper file with all configuration. This scenario can be executed by simple command to see a live demo of the execution.
 
 ``` 
-cd cucumber_now       # Navigate into the created directory   
+cd rspec_now       # Navigate into the created directory   
 
 rake rspec_now        # Executes using cucumber rake task
 ```   
