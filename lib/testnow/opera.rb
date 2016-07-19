@@ -1,18 +1,31 @@
-module TestNow
+class Opera
 
+	@private
+	def opera_config
+	  	@client = Selenium::WebDriver::Remote::Http::Default.new
+	  	@client.timeout = 180 # seconds
+	  	@service = Selenium::WebDriver::Chrome::Service.new("/usr/local/bin/operadriver", 48923)
+	  	@service.start
+	  	@cap = Selenium::WebDriver::Remote::Capabilities.chrome('operaOptions' => {'binary' => "#{get_binary_path}", 'args' => ["--ignore-certificate-errors"]})
+	end
 
-	#Opera browser
+	# Opera browser
 	def launch_driver_opera
-	  client = Selenium::WebDriver::Remote::Http::Default.new
-	  client.timeout = 180 # seconds
-	  service = Selenium::WebDriver::Chrome::Service.new("/usr/local/bin/operadriver", 48923)
-	  service.start
-	  cap = Selenium::WebDriver::Remote::Capabilities.chrome('operaOptions' => {'binary' => "#{get_binary_path}", 'args' => ["--ignore-certificate-errors"]})
-	  @driver = Selenium::WebDriver.for(:remote, :url => service.uri, :desired_capabilities => cap, :http_client => client)
-	  @driver.manage.timeouts.implicit_wait = 30
-	  @driver.manage.window.maximize
-	  @driver.manage.timeouts.page_load = 120
-	  return @driver
+		self.opera_config
+	  	@driver = Selenium::WebDriver.for(:remote, :url => @service.uri, :desired_capabilities => @cap, :http_client => @client)
+	  	@driver.manage.timeouts.implicit_wait = 30
+	  	@driver.manage.window.maximize
+	  	@driver.manage.timeouts.page_load = 120
+	  	return @driver
+	end
+
+	def launch_watir_opera
+		self.opera_config
+		browser = Watir::Browser.new(:remote, :url => @service.uri, :desired_capabilities => @cap, :http_client => @client)
+		browser.driver.manage.timeouts.implicit_wait = 30
+	  	browser.driver.manage.window.maximize
+	  	browser.driver.manage.timeouts.page_load = 120
+	  	return browser
 	end
 
 

@@ -86,7 +86,7 @@ def cucumber_now
   puts "*       and run the command 'cucumber features' or 'rake cucumber_now'         *"
   puts "* A beautiful screenshot embedded report will be created in reports directory. *"
   puts "*                            !!! HAPPY AUTOMATION !!!                          *"
-  puts "*"*80+"\n"
+  puts "*"*80+"\n\n\n"
 
 end
 
@@ -154,9 +154,10 @@ def rspec_now
 end
 
 
+
 def print(msg)
   puts "\n"
-  puts "=>=>=>=>=> " + msg
+  puts "=>=>=> " + msg
   sleep 1
 end
 
@@ -200,6 +201,8 @@ else
     cucumber_now
   elsif cmd == 'rspec_now'
     rspec_now
+  elsif cmd == 'watir_cucumber_now'
+    p watir_cucumber_now
   elsif cmd == 'version'
     puts File.read(File.expand_path("../../lib/testnow/version", __FILE__))
   else

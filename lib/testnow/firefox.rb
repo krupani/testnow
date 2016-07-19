@@ -1,4 +1,5 @@
-module TestNow
+# module TestNow
+class Firefox
 
   #Firefox browser
   def launch_driver_firefox
@@ -39,6 +40,14 @@ module TestNow
       else
         return "/tmp/"
     end
+  end
+
+  def launch_watir_firefox
+    browser = Watir::Browser.new
+    browser.driver.manage.timeouts.implicit_wait = 30
+    browser.driver.manage.timeouts.page_load = 120
+    browser.driver.manage.window.maximize
+    return browser
   end
 
 end
