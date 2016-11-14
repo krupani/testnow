@@ -6,6 +6,6 @@ Feature: As a github user
     Given I am on github page
     When I search for "Kaushal Rupani" keyword
     And I follow the Users Tab
-    Then I verify "Kaushal Rupani" is displayed
+    Then I verify "Kaushal" is displayed
     When I follow username link to view the profile page
     Then I verify "Kaushal Rupani" is displayed

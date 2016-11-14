@@ -72,9 +72,6 @@ def cucumber_now(framework="cucumber")
 
     print "Creating Gemfile -- used to contain all required gems information."
     FileUtils.copy(@showtime_dir+"/watir/Gemfile", @root_dir)
-
-    print "Creating Rakefile -- used to write automation execution tasks."
-    FileUtils.copy(@showtime_dir+"/watir/Rakefile", @root_dir)
   else
     print "Creating config files -- hooks.rb -- used for setup and teardown purpose."
     FileUtils.copy(@showtime_dir+"/hooks.rb", @support_dir)
@@ -89,10 +86,10 @@ def cucumber_now(framework="cucumber")
 
     print "Creating Gemfile -- used to contain all required gems information."
     FileUtils.copy(@showtime_dir+"/Gemfile", @root_dir)
-
-    print "Creating Rakefile -- used to write automation execution tasks."
-    FileUtils.copy(@showtime_dir+"/Rakefile", @root_dir)
   end
+
+  print "Creating Rakefile -- used to write automation execution tasks."
+  FileUtils.copy(@showtime_dir+"/Rakefile", @root_dir)
   
   print "Creating cucumber.yml -- used to provide cucumber options"
   FileUtils.copy(@showtime_dir+"/cucumber.yml", @root_dir)
@@ -116,14 +113,12 @@ def cucumber_now(framework="cucumber")
   if framework == "watir"
     puts "*           Congratulations!!! Your Watir-WebDriver-Ruby-Cucumber              *"
     puts "*                       framework is ready to use.                             *"
-    puts "*    To run the sample test, please cd into watir_cucumber_now directory       *"
-    puts "*    and run the command 'cucumber features' or 'rake watir-cucumber_now'      *"
+    puts "*    To run the sample test, please cd into watir_cucumber_now directory       *"  
   else
     puts "*  Congratulations!!! Your WebDriver-Ruby-Cucumber framework is ready to use.  *"
     puts "*        To run the sample test, please cd into cucumber_now directory         *"
-    puts "*       and run the command 'cucumber features' or 'rake cucumber_now'         *"
   end
-  
+  puts "*         and run the command 'cucumber features' or 'rake testnow'            *"
   puts "* A beautiful screenshot embedded report will be created in reports directory. *"
   puts "*                            !!! HAPPY AUTOMATION !!!                          *"
   puts "*"*80+"\n\n\n"
@@ -131,8 +126,13 @@ def cucumber_now(framework="cucumber")
 end
 
 
-def rspec_now
-  @root_dir = File.join(FileUtils.pwd, "rspec_now")
+def rspec_now(framework="cucumber")
+  if framework == "watir"
+    @base = "watir_rspec_now"
+  else
+    @base = "rspec_now"
+  end
+  @root_dir = File.join(FileUtils.pwd, @base)
   @spec_dir = File.join(@root_dir, "spec")
   @scenario_dir = File.join(@spec_dir, "scenarios")
   @pages_dir = File.join(@root_dir, "pages")
@@ -141,9 +141,16 @@ def rspec_now
     print 'There is already rspec_now directory. Either delete it or try running the command from some other directory.'
     exit 1
   end
-  puts "\n"+"*"*67
-  puts "*  TestNow is creating a WebDriver-Ruby-RSpec framework for you.  *"
-  puts "*"*67
+  
+  if framework == "watir"
+    puts "\n"+"*"*73
+    puts "*  TestNow is creating a Watir-WebDriver-Ruby-RSpec framework for you.  *"
+    puts "*"*73
+  else
+    puts "\n"+"*"*67
+    puts "*  TestNow is creating a WebDriver-Ruby-RSpec framework for you.  *"
+    puts "*"*67
+  end
 
   print "Creating project directory."
   FileUtils.makedirs(@root_dir)
@@ -157,42 +164,61 @@ def rspec_now
   print "Creating the page directory just in case if you want to use page object pattern."
   FileUtils.makedirs(@pages_dir)
 
-  print "Creating config file -- spec_helper.rb -- used for dependency declaration and global setup-teardown"
-  FileUtils.copy(@showtime_dir+"/spec_helper.rb", @spec_dir)
+  if framework == "watir"
+    print "Creating config file -- spec_helper.rb -- used for dependency declaration and global setup-teardown"
+    FileUtils.copy(@showtime_dir+"/watir/spec_helper.rb", @spec_dir)
 
-  print "Creating Gemfile -- used to contain all required gems information."
-  FileUtils.copy(@showtime_dir+"/Gemfile", @root_dir)
+    print "Creating Gemfile -- used to contain all required gems information."
+    FileUtils.copy(@showtime_dir+"/watir/Gemfile_rspec", @root_dir+"/Gemfile")
+
+    print "Creating spec file inside the scenarios directory."
+    FileUtils.copy(@showtime_dir+"/watir/github_spec.rb", @scenario_dir)
+
+    print "Creating page class file inside the pages directory."
+    FileUtils.copy(@showtime_dir+"/watir/github_page.rb", @pages_dir)
+  else
+    print "Creating config file -- spec_helper.rb -- used for dependency declaration and global setup-teardown"
+    FileUtils.copy(@showtime_dir+"/spec_helper.rb", @spec_dir)
+
+    print "Creating Gemfile -- used to contain all required gems information."
+    FileUtils.copy(@showtime_dir+"/Gemfile_rspec", @root_dir+"/Gemfile")
+
+    print "Creating spec file inside the scenarios directory."
+    FileUtils.copy(@showtime_dir+"/github_spec.rb", @scenario_dir)
+
+    print "Creating page class file inside the pages directory."
+    FileUtils.copy(@showtime_dir+"/github_page.rb", @pages_dir)
+  end
 
   print "Creating Rakefile -- used to write automation execution tasks."
   FileUtils.copy(@showtime_dir+"/Rakefile_rspec", @root_dir+"/Rakefile")
-
-  print "Creating spec file inside the scenarios directory."
-  FileUtils.copy(@showtime_dir+"/github_spec.rb", @scenario_dir)
-
-  print "Creating page class file inside the pages directory."
-  FileUtils.copy(@showtime_dir+"/github_page.rb", @pages_dir)
 
   puts "\n Would you like to continue with dependency(gems) installation? (Y/n) :"
   ans=gets
   if ans.chomp.downcase == "y"
     print "TestNow is installing gems using bundler. Please wait till process completed."
-    system('bundle install --gemfile=$(pwd)/rspec_now/Gemfile')
+    system("bundle install --gemfile=$(pwd)/#{@base}/Gemfile")
     print "Dependency installation completed successfully.\n"
   else
-    print "You can do this later. Just cd into rspec_now directory and run 'bundle install'\n"
+    print "You can do this later. Just cd into #{@base} directory and run 'bundle install'\n\n"
     exit 1
   end
 
   puts "\n"+"*"*77
-  puts "*  Congratulations!!! Your WenDriver-Ruby-RSpec framework is ready to use.  *"
-  puts "*    To run the sample reference test, please cd into rspec_now directory   *"
-  puts "*         and run the command 'rake rspec_now'.  Enjoy the show!!!          *"
+  if framework == "watir"
+    puts "*           Congratulations!!! Your Watir-WebDriver-RSpec-Ruby              *"
+    puts "*                    framework is ready to use.                             *"
+    puts "*    To run the sample test, please cd into watir_rspec_now directory       *"
+  else
+    puts "*  Congratulations!!! Your WebDriver-RSpec-Ruby framework is ready to use.  *"
+    puts "*         To run the sample test, please cd into rspec_now directory        *"
+  end 
+  puts "*          and run the command 'rake testnow'.  Enjoy the show!!!           *"
   puts "*    A beautiful descriptive report will be created in reports directory.   *"
   puts "*                        !!! HAPPY AUTOMATION !!!                           *"
   puts "*"*77+"\n"
 
 end
-
 
 
 def print(msg)
@@ -210,21 +236,30 @@ def print_help
     help
     cucumber_now
     rspec_now
+    watir_cucumber_now
+    watir_rspec_now
     version
 
 
     Command descriptions  :
+
       help                : Prints help information in detail.
 
       cucumber_now        : Creates a WebDriver-Ruby-Cucumber skeleton framework for cross
                             browser automation testing. Also creates a sample scenario for
-                            reference which can be used to add more features(tests). This
-                            framework is compatible with TestNow platform.
+                            reference which can be used to add more features(tests).
 
       rspec_now           : Creates a WebDriver-Ruby-RSpec skeleton framework for cross
                             browser automation testing. Also creates a sample scenario for
-                            reference which can be used to add more specs(tests). This
-                            framework is compatible with TestNow platform.
+                            reference which can be used to add more specs(tests).
+
+      watir_cucumber_now  : Creates a Watir-WebDriver-Ruby-Cucumber skeleton framework for 
+                            cross browser automation testing. Also creates a sample scenario 
+                            for reference which can be used to add more features(tests).
+
+      watir_rspec_now     : Creates a Watir-WebDriver-Ruby-RSpec skeleton framework for cross
+                            browser automation testing. Also creates a sample scenario for
+                            reference which can be used to add more specs(tests).
 
       version             : Prints the gem version
 
@@ -243,6 +278,8 @@ else
     rspec_now
   elsif cmd == 'watir_cucumber_now'
     cucumber_now("watir")
+  elsif cmd == 'watir_rspec_now'
+    rspec_now("watir")
   elsif cmd == 'version'
     puts File.read(File.expand_path("../../lib/testnow/version", __FILE__))
   else

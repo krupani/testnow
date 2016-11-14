@@ -3,11 +3,11 @@ require File.join(File.dirname(__FILE__),'/../spec_helper')
 describe "As a github user, my public profile" do
 	
 	before(:each) do
-		@driver.get(ENV['TEST_URL'])
+		@browser.goto(ENV['TEST_URL'])
 	end
 
 	it "should display my name" do
-		git = GithubPage.new(@driver)
+		git = GithubPage.new(@browser)
 		git.search_github("Kaushal Rupani")
 		git.click_tab("Users")
 		git.verify_text_presence("Kaushal")

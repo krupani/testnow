@@ -23,7 +23,7 @@ class GithubPage
   end
 
   def verify_text_presence(word)
-    expect(@browser.text).to include(word)
+    expect(@browser.element(:text => word).present?).to be true
   end
 
 end
