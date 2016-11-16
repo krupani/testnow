@@ -23,7 +23,15 @@ When creating a Selenium-WebDriver automation suite, if one requires cross brows
 
 Unlike some very famous Ruby-WebDriver tools which wraps up the WebDriver object and provides its own set of commands, TestNow gem returns you the ```driver``` object as is but initialized with any browser of your choice.
 
-In your existing automation suite, just put the following command in the setup method. (Setup method is where WebDriver is initialized with a certain browser and a driver object is created.)
+In your existing automation suite, require and include the testnow gem in your config file 
+(i.e usually env.rb for cucumber or spec_helper for rspec depending on your framework)
+
+```
+require 'testnow'
+include TestNow
+```
+
+now as everything is required, included and ready, just put the following command in the setup method. (Setup method is where WebDriver is initialized with a certain browser and a driver object is created. i.e hooks.rb file for cucumber)
 
 ```
 @driver = TestNow.init
