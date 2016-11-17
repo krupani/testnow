@@ -70,10 +70,11 @@ now as everything is required, included and ready, just put the following comman
 TestNow gem uses the environment variable __BROWSER__ to detect which browser to initialize. If no value is set for this variable then firefox will be initialized by default.
 
 ### <a name="cli"></a> 2. Command Line Tool -- testnow command
-When you install testnow gem, it installs a command line tool which helps you to create automation frameworks with cross browser configuration in a jiffy.
+When you install testnow gem, it installs a command line tool which helps you to create automation frameworks with cross browser configuration in a jiffy.   
 This command line tool has multiple command and can be seen using help
 Following are the list of commands:   
-<PUT IMAGE HERE>
+    
+![help, version, cucumber_now, rspec_now, watir_cucumber_now, watir_rspec_now] (/images/commands.png)
 
 
   
