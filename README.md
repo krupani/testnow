@@ -3,36 +3,44 @@
 An instant WebDriver-Ruby-Cucumber or WebDriver-Ruby-RSpec framework which has ability to do cross browser testing on any of the popular browsers, Firefox, Chrome, Opera, Internet Explorer, Safari, Android Browser. It uses the selenium-webdriver to driver the browsers already installed on your box.
 
 ## Table of Contents
-1) [Installation](#installation)  
-    - Install using gem command  
-    - Install using bundler  
-2) [Setup](#setup)
-    - [Cross browser configuration using testnow for your existing project](#cross)
-    - [Command Line Tool](#cli)
-3) [Usage](#usage)
-    - [Instantly create a fresh Cucumber-WebDriver framework](#cuke)
-    - [Instantly create a fresh RSpec-WebDriver framework](#rspec)
-    - [Instantly create a fresh Watir-Cucumber-WebDriver framework](#watir-cuke)
-    - [Instantly create a fresh Watir-RSpec-WebDriver framework](#watir-rspec)
-4) [Variables](#variables)
-    - BROWSER
-    - TEST_URL
-5) [Contributing](#contributing)
+- [Installation](#installation)  
+    - [Install using gem command](#gem)    
+    - [Install using bundler](#bundler)  
+- [Setup](#setup)   
+    - [Cross browser configuration using testnow for your existing project](#cross)   
+    - [Command Line Tool -- testnow command](#cli)   
+- [Usage](#usage)   
+    - [Instantly create a fresh Cucumber-WebDriver framework](#cuke)    
+    - [Instantly create a fresh RSpec-WebDriver framework](#rspec)     
+    - [Instantly create a fresh Watir-Cucumber-WebDriver framework](#watir-cuke)    
+    - [Instantly create a fresh Watir-RSpec-WebDriver framework](#watir-rspec)      
+- [Variables](#variables)       
+    - [BROWSER](#browser)   
+    - [TEST_URL](#test-url)   
+- [Contributing](#contributing)   
 
 
 
-## Installation 
-You must have Ruby installed before you can install this gem.
+## Installation  
+There are multiple ways in which you can install and use testnow gem.
+You must have Ruby installed before you can install this gem.   
 
+### <a name="gem" /> 1. Install using gem command
+Just use following command from you Terminal.
 ``` 
 gem install testnow 
 ```
-
-or you can include it in your Gemfile and run bundle install
+   
+### <a name="bundler" /> 2. Install using bundler    
+You can include it in your Gemfile and run bundle install
 
 ``` 
 gem 'testnow' 
-```  
+```   
+then run following   
+```   
+bundle install   
+```   
   
   
 ## Setup   
@@ -46,8 +54,11 @@ In your existing automation suite, require and include the testnow gem in your c
 (i.e usually env.rb for cucumber or spec_helper for rspec depending on your framework)
 
 ```
-require 'testnow'
-include TestNow
+require 'testnow'   
+
+include TestNow             # for basic webdriver framework   
+   
+include TestNow::Watir      # for watir webdriver framework   
 ```
 
 now as everything is required, included and ready, just put the following command in the setup method. (Setup method is where WebDriver is initialized with a certain browser and a driver object is created. i.e hooks.rb file for cucumber)
@@ -58,11 +69,12 @@ now as everything is required, included and ready, just put the following comman
 
 TestNow gem uses the environment variable __BROWSER__ to detect which browser to initialize. If no value is set for this variable then firefox will be initialized by default.
 
-### <a name="cli"></a> 2. Command Line Tool
-When you install testnow gem, it installs a command line tool which helps you to create automation frameworks with cross browser configuration in a jiffy.
+### <a name="cli"></a> 2. Command Line Tool -- testnow command
+When you install testnow gem, it installs a command line tool which helps you to create automation frameworks with cross browser configuration in a jiffy.   
 This command line tool has multiple command and can be seen using help
 Following are the list of commands:   
-<PUT IMAGE HERE>
+    
+![help, version, cucumber_now, rspec_now, watir_cucumber_now, watir_rspec_now] (/images/commands.png)
 
 
   
@@ -151,7 +163,7 @@ rake testnow BROWSER=opera
 
 [NOTE: This will work provided you have webdrivers placed in PATH varibale. i.e chromedriver or operadriver]
    
-### <a name="title"></a> 2. TEST_URL
+### <a name="test-url"></a> 2. TEST_URL
 This variable currently only works if you create a framework from testnow command line tool. This variable is called __TEST_URL__ and it gives you the power to pass the test url as a parameter. As we know that there can be multiple test environment and not necessarily we would need to run our tests on 1 environment. So to avaoid changing the code, testnow provides exposure of test url.
 
 For Example:

@@ -1,5 +1,6 @@
 Given /^I am on github page$/ do
-  @browser.goto("https://github.com")
+  ENV['TEST_URL'] = "https://github.com" if ENV['TEST_URL'].nil?
+  @browser.goto(ENV['TEST_URL'])
 end
 
 When (/^I search for "([^"]*)" keyword$/) do |key|
