@@ -1,8 +1,9 @@
 Given /^I am on github page$/ do
-  @driver.get("https://github.com")
+  ENV['TEST_URL'] = "https://github.com" if ENV['TEST_URL'].nil?
+  @driver.get(ENV['TEST_URL'])
 end
 
-When /^I search for "([^"]*)" keyword$/ do |key|
+When (/^I search for "([^"]*)" keyword$/) do |key|
   home = GithubPage.new(@driver)
   home.search_github(key)
 end
@@ -17,7 +18,7 @@ When /^I follow username link to view the profile page$/ do
   home.visit_profile
 end
 
-Then /^I verify "([^"]*)" is displayed$/ do |name|
+Then (/^I verify "([^"]*)" is displayed$/) do |name|
   home = GithubPage.new(@driver)
   home.verify_text_presence(name)
 end

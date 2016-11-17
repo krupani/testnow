@@ -98,7 +98,7 @@ def cucumber_now(framework="cucumber")
   puts "*  TestNow completed framework creation. A sample scenario is also created for your reference.  *"
   puts "*"*97
 
-  puts "\n Would you like to continue with dependency(gems) installation? (Y/n) :"
+  puts "\nWould you like to continue with dependency(gems) installation? (Y/n) :"
   ans=gets
   if ans.chomp.downcase == "y"
     print "TestNow is installing gems using bundler. Please wait till process completed."

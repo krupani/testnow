@@ -8,12 +8,12 @@ Gem::Specification.new do |s|
 	s.authors				=	["Kaushal Rupani"]
 	s.email					=	'kushrupani@live.com'
 	s.files					=	Dir.glob("{lib,data}/**/*") + %w(README.md LICENCE)
-	s.test_files  			= 	`git ls-files -- {spec,features}/*`.split("\n")
+	s.test_files  			= 	`git ls-files -- {spec,features}/*`.split("\n") + %w(Rakefile)
 	s.executables 			= 	`git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
 	s.homepage				=	"https://github.com/krupani/testnow"
 	s.license				= 	'MIT'
 	s.add_runtime_dependency('bundler', '>= 1.10.0')
 	s.add_development_dependency('selenium-webdriver', '>= 2.52')
 	s.add_development_dependency('watir-webdriver', '>=0.9.1')
-	s.post_install_message 	= "=>=>=>=>=> Thank you for installing TestNow gem. <=<=<=<=<= \n"
+	s.post_install_message 	= "\n\n=>=>=>=>=> Thank you for installing TestNow gem. <=<=<=<=<= \n\n"
 end
