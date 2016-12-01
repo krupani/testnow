@@ -5,7 +5,11 @@ class GithubPage
   end
 
   def search_github(key)
-    @driver.find_element(:name => "q").send_keys(key+"\n")
+    if ENV['BROWSER'].downcase == "edge"
+      @driver.get(@driver.current_url+"/search?q=#{key}")
+    else
+      @driver.find_element(:name => "q").send_keys(key+"\n")
+    end
   end
 
   def click_tab(tab)

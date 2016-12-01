@@ -5,7 +5,11 @@ class GithubPage
   end
 
   def search_github(key)
-    @browser.text_field(:name => "q").set "#{key}\n"
+    if ENV['BROWSER'].downcase == "edge"
+      @browser.goto(@browser.driver.current_url+"/search?q=#{key}")
+    else
+      @browser.text_field(:name => "q").set "#{key}\n"
+    end
   end
 
   def click_tab(tab)
