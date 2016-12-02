@@ -2,6 +2,9 @@
 
 An instant WebDriver-Ruby-Cucumber or WebDriver-Ruby-RSpec framework which has ability to do cross browser testing on any of the popular browsers, Firefox, Chrome, Opera, Internet Explorer, Safari, Android Browser. It uses the selenium-webdriver to driver the browsers already installed on your box.
 
+[NOTE] -- This gem does not provide any webdrivers or install any browsers, it is related to browser configuration and framework generation. For the tests to run, browsers should be installed and webdrivers should be present in the path variable.   
+
+
 ## Table of Contents
 - [Installation](#installation)  
     - [Install using gem command](#gem)    
@@ -17,7 +20,9 @@ An instant WebDriver-Ruby-Cucumber or WebDriver-Ruby-RSpec framework which has a
 - [Variables](#variables)       
     - [BROWSER](#browser)   
     - [TEST_URL](#test-url)   
-- [Contributing](#contributing)   
+- [Browsers](#browsers)    
+- [Contributing](#contributing)  
+- [Issues](#issues)     
 
 
 
@@ -171,6 +176,22 @@ For Example:
 rake testnow BROWSER=chrome TEST_URL=https://github.com
 ```
 
+## Browsers  
+As mentioned in the above section that there is a variable exposed called _BROWSER_ but what are the values to be passed and which OS-Browsers combinations are supported, well here is a index grid below:
+
+| OS  | Chrome  | Firefox (v47-)  | Firefox Gecko (v48+)  | IE 11/10   | Edge  | Opera  | PhantomJS   | Chrome Mobile[2]   |    
+|---|---|---|---|---|---|---|---|---|    
+| Linux     | Supported  | Supported  | Coming Soon!  | N/A         | N/A         | Supported[1]  | Coming Soon!  | Coming Soon!  |   
+| Mac       | Supported  | Supported  | Coming Soon!  | N/A         | N/A         | Supported[1]  | Coming Soon!  | Coming Soon!  |     
+| Windows   | Supported  | Supported  | Coming Soon!  | Supported   | Supported[3]| Coming Soon!  | Coming Soon!  | Coming Soon!  |    
+  
+Note:  
+[1] Currently it is expected that the Opera webdriver binary is present inside "/usr/local/bin/operadriver, soon this path will be made customizable and exposaed as a varibale.   
+[2] This is not another browser, it is the mobile emulation which Google Chrome proovides through its developer tools.   
+[3] Please download the required Microsoft WebDriver as per your windows 10 build number. Windows 10 build can be checked with the `winver` command.   
 
 ## Contributing
-Ideas and suggestions are always always most welcome. Please fork this gem code and feel free to add any updates, suggestions etc and create a pull request. 
+Ideas and suggestions are always always most welcome. Please fork this gem code and feel free to add any updates, suggestions etc and create a pull request.  
+
+## Issues
+If you face any problem related to syntax, usability, documentation then please raise an [issues](https://github.com/krupani/testnow/issues)    
