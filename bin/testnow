@@ -20,7 +20,7 @@ def cucumber_now(framework="cucumber")
   @report_dir = File.join(@root_dir, 'reports')
 
   if File.exist?(@root_dir)
-    print 'There is already #{@base} directory. Either delete it or try running the command from some other directory.'
+    print "There is already #{@base} directory. Either delete it or try running the command from some other directory."
     exit 1
   end
   
@@ -138,7 +138,7 @@ def rspec_now(framework="cucumber")
   @pages_dir = File.join(@root_dir, "pages")
 
   if File.exist?(@root_dir)
-    print 'There is already rspec_now directory. Either delete it or try running the command from some other directory.'
+    print "There is already #{@base} directory. Either delete it or try running the command from some other directory."
     exit 1
   end
   

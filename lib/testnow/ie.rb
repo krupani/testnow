@@ -4,7 +4,11 @@ class IE
   def ie_config
     @client = Selenium::WebDriver::Remote::Http::Default.new
     @client.timeout = 120
-    @caps = Selenium::WebDriver::Remote::Capabilities.ie('ie.ensureCleanSession' => true, :javascript_enabled => true, :http_client => client,  :native_events => false, :acceptSslCerts => true)
+    @caps = Selenium::WebDriver::Remote::Capabilities.ie('ie.ensureCleanSession' => true,
+                                                         :javascript_enabled => true,
+                                                         :http_client => @client,
+                                                         :native_events => false,
+                                                         :acceptSslCerts => true)
   end
 
   @private
@@ -23,14 +27,18 @@ class IE
 
   def launch_driver_ie
     self.ie_config
-    driver = Selenium::WebDriver.for(:ie, :desired_capabilities => @caps, :http_client => @client)
+    driver = Selenium::WebDriver.for(:ie,
+                                     :desired_capabilities => @caps,
+                                     :http_client => @client)
     self.set_ie_config(driver)
     return driver
   end
 
   def launch_watir_ie
     self.ie_config
-    browser = Watir::Browser.new(:ie, :desired_capabilities => @caps, :http_client => @client)
+    browser = Watir::Browser.new(:ie,
+                                 :desired_capabilities => @caps,
+                                 :http_client => @client)
     self.set_ie_config(browser.driver)
     return browser
   end
