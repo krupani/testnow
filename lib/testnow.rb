@@ -67,6 +67,38 @@ module TestNow
     end
   end
 
+  module Capybara
+    def init
+      ENV['BROWSER'] = "firefox" if ENV['BROWSER'].nil?
+      case ENV['BROWSER'].downcase.gsub(" ","")
+        when "chrome"
+          chrome = Chrome.new
+          chrome.launch_capybara_chrome
+        # when "android"
+        #   puts "Coming Soon!!\n"
+        #   puts "Apologies for inconvenience...\n\n"
+        # when "opera"
+        #   opera = Opera.new
+        #   opera.launch_watir_opera
+        # when "androidchrome"
+        #   ac = AndroidChrome.new
+        #   ac.launch_watir_android_chrome
+        # when "ie","internetexplorer"
+        #   ie = IE.new
+        #   ie.launch_watir_ie
+        # when "edge","microsoftedge"
+        #   edge = MicrosoftEdge.new
+        #   edge.launch_watir_edge
+        # when "firefoxnew","firefoxgecko"
+        #   firefoxgecko = FirefoxGecko.new
+        #   firefoxgecko.launch_capybara_firefox_gecko
+        # else
+        #   ff = Firefox.new
+        #   ff.launch_watir_firefox
+      end
+    end
+  end
+
 end
 
 

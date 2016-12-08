@@ -20,4 +20,14 @@ class Chrome
 		return browser
 	end
 
+	def launch_capybara_chrome
+		Capybara.default_driver = :selenium
+  		Capybara.register_driver :chrome do |app|
+    		Capybara::Selenium::Driver.new(app, :browser => :chrome)
+  		end
+  		Capybara.current_driver = :chrome
+  		Capybara.default_selector = :css
+  		Capybara.default_max_wait_time = 10
+	end
+
 end

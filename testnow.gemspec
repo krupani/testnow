@@ -15,5 +15,6 @@ Gem::Specification.new do |s|
 	s.add_runtime_dependency('bundler', '>= 1.10.0')
 	s.add_development_dependency('selenium-webdriver', '>= 2.52')
 	s.add_development_dependency('watir-webdriver', '>=0.9.1')
+	s.add_development_dependency('capybara', '>=0.9.1')
 	s.post_install_message 	= "\n\n=>=>=>=>=> Thank you for installing TestNow gem. <=<=<=<=<= \n\n"
 end
