@@ -5,7 +5,7 @@ class GithubPage
   end
 
   def search_github(key)
-    if ENV['BROWSER'].downcase == "edge"
+    if ENV['BROWSER'].downcase == "edge" || ENV['BROWSER'].downcase == "firefoxgecko"
       @browser.goto(@browser.driver.current_url+"/search?q=#{key}")
     else
       @browser.text_field(:name => "q").set "#{key}\n"

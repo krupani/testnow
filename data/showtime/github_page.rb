@@ -5,7 +5,7 @@ class GithubPage
   end
 
   def search_github(key)
-    if ENV['BROWSER'].downcase == "edge"
+    if ENV['BROWSER'].downcase == "edge" || ENV['BROWSER'].downcase == "firefoxgecko"
       @driver.get(@driver.current_url+"/search?q=#{key}")
     else
       @driver.find_element(:name => "q").send_keys(key+"\n")

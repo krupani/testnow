@@ -3,6 +3,7 @@ class Firefox
 
   #Firefox browser
   def launch_driver_firefox
+    caps = Selenium::WebDriver::Remote::Capabilities.firefox(marionette: false)
     ENV['IS_UPA'] = "false" if ENV['IS_UPA'].nil?
     if ENV['IS_UPA']=="true"
       ENV['HAR_DIR'] = get_tmp_dir if ENV['HAR_DIR'].nil?
@@ -21,14 +22,14 @@ class Firefox
       profile['extensions.firebug.netexport.defaultLogDir'] = ENV['HAR_DIR'].to_s
       profile['extensions.firebug.netexport.defaultFileName'] = "upaReport.har"
       profile['extensions.firebug.netexport.jsonpCallback'] = "jsonCallback"
-      @driver = Selenium::WebDriver.for :firefox, :profile => profile
+      driver = Selenium::WebDriver.for(:firefox, :profile => profile, :desired_cpabilities => caps)
     else
-      @driver = Selenium::WebDriver.for :firefox
+      driver = Selenium::WebDriver.for(:firefox, :desired_cpabilities => caps)
     end
-    @driver.manage.timeouts.implicit_wait = 30
-    @driver.manage.timeouts.page_load = 120
-    @driver.manage.window.maximize
-    @driver
+    driver.manage.timeouts.implicit_wait = 30
+    driver.manage.timeouts.page_load = 120
+    driver.manage.window.maximize
+    driver
   end
 
   def get_tmp_dir
@@ -43,7 +44,8 @@ class Firefox
   end
 
   def launch_watir_firefox
-    browser = Watir::Browser.new
+    caps = Selenium::WebDriver::Remote::Capabilities.firefox(marionette: false)
+    browser = Watir::Browser.new(:firefox, :desired_capabilities => caps)
     browser.driver.manage.timeouts.implicit_wait = 30
     browser.driver.manage.timeouts.page_load = 120
     browser.driver.manage.window.maximize

@@ -181,9 +181,9 @@ As mentioned in the above section that there is a variable exposed called _BROWS
 
 | OS  | Chrome  | Firefox (v47-)  | Firefox Gecko (v48+)  | IE 11/10   | Edge  | Opera  | PhantomJS   | Chrome Mobile[2]   |    
 |---|---|---|---|---|---|---|---|---|    
-| Linux     | Supported  | Supported  | Coming Soon!  | N/A         | N/A         | Supported[1]  | Coming Soon!  | Coming Soon!  |   
-| Mac       | Supported  | Supported  | Coming Soon!  | N/A         | N/A         | Supported[1]  | Coming Soon!  | Coming Soon!  |     
-| Windows   | Supported  | Supported  | Coming Soon!  | Supported   | Supported[3]| Coming Soon!  | Coming Soon!  | Coming Soon!  |    
+| Linux     | Supported  | Supported  | Supported  | N/A         | N/A         | Supported[1]  | Coming Soon!  | Coming Soon!  |   
+| Mac       | Supported  | Supported  | Supported  | N/A         | N/A         | Supported[1]  | Coming Soon!  | Coming Soon!  |     
+| Windows   | Supported  | Supported  | Supported  | Supported   | Supported[3]| Coming Soon!  | Coming Soon!  | Coming Soon!  |    
   
 Note:  
 [1] Currently it is expected that the Opera webdriver binary is present inside "/usr/local/bin/operadriver, soon this path will be made customizable and exposaed as a varibale.   
@@ -194,4 +194,4 @@ Note:
 Ideas and suggestions are always always most welcome. Please fork this gem code and feel free to add any updates, suggestions etc and create a pull request.  
 
 ## Issues
-If you face any problem related to syntax, usability, documentation then please raise an [issues](https://github.com/krupani/testnow/issues)    
+If you face any problem related to syntax, usability, documentation then please raise an [issues](https://github.com/krupani/testnow/issues), testnow is committed to respond within 24hours...    
