@@ -20,4 +20,14 @@ class Chrome
 		return browser
 	end
 
+  def launch_driver_chrome_mobile
+    device_name = ENV['VERSION'].gsub("_"," ")
+    mobile_emulation = { "deviceName" => device_name }
+    caps = Selenium::WebDriver::Remote::Capabilities.chrome(
+        "chromeOptions" => { "mobileEmulation" => mobile_emulation })
+    driver = Selenium::WebDriver.for :chrome, desired_capabilities: caps
+    self.post_config(driver)
+    driver
+  end
+
 end
