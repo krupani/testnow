@@ -36,6 +36,9 @@ module TestNow
       when "phantomjs"
         puts "Coming Soon!!\n"
         puts "Apologies for inconvenience...\n\n"
+      when "chromemobile","mobilechrome"
+        chrome = Chrome.new
+        chrome.launch_driver_chrome_mobile
       else
         ff = Firefox.new
         ff.launch_driver_firefox
