@@ -25,7 +25,7 @@ class MicrosoftEdge
   end
 
   def launch_watir_edge
-    self.edge_config
+    self.pre_config
     browser = Watir::Browser.new(:edge,
                                  :desired_capabilities => @caps,
                                  :http_client => @client)
