@@ -29,7 +29,7 @@ class MicrosoftEdge
     browser = Watir::Browser.new(:edge,
                                  :desired_capabilities => @caps,
                                  :http_client => @client)
-    self.post_edge_config(browser.driver)
+    self.post_config(browser.driver)
     return browser
   end
 end
