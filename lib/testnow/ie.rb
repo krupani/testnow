@@ -3,7 +3,7 @@ class IE
   @private
   def ie_config
     @client = Selenium::WebDriver::Remote::Http::Default.new
-    @client.timeout = 120
+    @client.read_timeout = 120
     @caps = Selenium::WebDriver::Remote::Capabilities.ie('ie.ensureCleanSession' => true,
                                                          :javascript_enabled => true,
                                                          :http_client => @client,
