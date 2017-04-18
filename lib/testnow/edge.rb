@@ -6,7 +6,6 @@ class MicrosoftEdge
     @client.timeout = 120
     @caps = Selenium::WebDriver::Remote::Capabilities.edge(:native_events => false,
                                                            :acceptSslCerts => true)
-
   end
 
   @private
@@ -32,4 +31,5 @@ class MicrosoftEdge
     self.post_config(browser.driver)
     return browser
   end
+
 end
