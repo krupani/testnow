@@ -5,18 +5,14 @@ class GithubPage
   end
 
   def search_github(key)
-    if ENV['BROWSER'].downcase == "edge" || ENV['BROWSER'].downcase == "firefoxgecko"
-      @driver.get(@driver.current_url+"/search?q=#{key}")
-    else
-      @driver.find_element(:name => "q").send_keys(key+"\n")
-    end
+    @driver.get(@driver.current_url+"/search?q=#{key}")
   end
 
   def click_tab(tab)
     wait = Selenium::WebDriver::Wait.new(:timeout => 30)
     case tab
       when "Users"
-        @driver.find_element(:css => ".menu>a[href*=Users]").click
+        @driver.find_element(:css => "[href*=Users]").click
         wait.until{@driver.find_element(:id => "user_search_results").displayed?}
       else
         puts "Wrong tab buddy!!"

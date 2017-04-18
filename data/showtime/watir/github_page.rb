@@ -5,17 +5,13 @@ class GithubPage
   end
 
   def search_github(key)
-    if ENV['BROWSER'].downcase == "edge" || ENV['BROWSER'].downcase == "firefoxgecko"
-      @browser.goto(@browser.driver.current_url+"/search?q=#{key}")
-    else
-      @browser.text_field(:name => "q").set "#{key}\n"
-    end
+    @browser.goto(@browser.driver.current_url+"/search?q=#{key}")
   end
 
   def click_tab(tab)
     case tab
       when "Users"
-        @browser.element(:css => ".menu>a[href*=Users]").click
+        @browser.element(:css => "[href*=Users]").click
         @browser.element(:id => "user_search_results").wait_until_present(timeout=30)
       else
         puts "Wrong tab buddy!!"

@@ -1,7 +1,6 @@
 require 'testnow/chrome'
 require 'testnow/opera'
 require 'testnow/firefox'
-require 'testnow/android'
 require 'testnow/android_chrome'
 require 'testnow/ie'
 require 'testnow/edge'
@@ -15,9 +14,6 @@ module TestNow
       when "chrome"
         chrome = Chrome.new
         chrome.launch_driver_chrome
-      when "android"
-        puts "Coming Soon!!\n"
-        puts "Apologies for inconvenience...\n\n"
       when "opera"
         opera = Opera.new
         opera.launch_driver_opera
@@ -30,7 +26,7 @@ module TestNow
       when "edge"
         edge = MicrosoftEdge.new
         edge.launch_driver_edge
-      when "firefoxgecko","geckofirefox","firefoxnew","newfirefox"
+      when "firefoxgecko","geckofirefox","firefoxnew","newfirefox","firefox"
         firefox_gecko = FirefoxGecko.new
         firefox_gecko.launch_driver_firefox_gecko
       when "phantomjs"
@@ -39,7 +35,7 @@ module TestNow
       when "chromemobile","mobilechrome"
         chrome = Chrome.new
         chrome.launch_driver_chrome_mobile
-      else
+      when "firefoxold","oldfirefox"
         ff = Firefox.new
         ff.launch_driver_firefox
     end
@@ -52,9 +48,6 @@ module TestNow
         when "chrome"
           chrome = Chrome.new
           chrome.launch_watir_chrome
-        when "android"
-          puts "Coming Soon!!\n"
-          puts "Apologies for inconvenience...\n\n"
         when "opera"
           opera = Opera.new
           opera.launch_watir_opera
@@ -67,10 +60,13 @@ module TestNow
         when "edge"
           edge = MicrosoftEdge.new
           edge.launch_watir_edge
-        when "firefoxgecko","geckofirefox","firefoxnew","newfirefox"
+        when "firefoxgecko","geckofirefox","firefoxnew","newfirefox","firefox"
           firefox_gecko = FirefoxGecko.new
           firefox_gecko.launch_watir_firefox_gecko
-        else
+        when "chromemobile","mobilechrome"
+          chrome = Chrome.new
+          chrome.launch_watir_chrome_mobile
+        when "firefoxold","oldfirefox"
           ff = Firefox.new
           ff.launch_watir_firefox
       end
