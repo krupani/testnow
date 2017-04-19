@@ -19,7 +19,8 @@ An instant WebDriver-Ruby-Cucumber or WebDriver-Ruby-RSpec framework which has a
     - [Instantly create a fresh Watir-RSpec-WebDriver framework](#watir-rspec)      
 - [Variables](#variables)       
     - [BROWSER](#browser)   
-    - [TEST_URL](#test-url)   
+    - [TEST_URL](#test-url)
+    - [DEVICE](#device)
 - [Browsers](#browsers)    
 - [Contributing](#contributing)  
 - [Issues](#issues)     
@@ -79,7 +80,7 @@ When you install testnow gem, it installs a command line tool which helps you to
 This command line tool has multiple command and can be seen using help
 Following are the list of commands:   
     
-![help, version, cucumber_now, rspec_now, watir_cucumber_now, watir_rspec_now] (/images/commands.png)
+![help, version, cucumber_now, rspec_now, watir_cucumber_now, watir_rspec_now](https://github.com/krupani/testnow/blob/master/images/commands.png)
 
 
   
@@ -169,21 +170,36 @@ rake testnow BROWSER=opera
 [NOTE: This will work provided you have webdrivers placed in PATH varibale. i.e chromedriver or operadriver]
    
 ### <a name="test-url"></a> 2. TEST_URL
-This variable currently only works if you create a framework from testnow command line tool. This variable is called __TEST_URL__ and it gives you the power to pass the test url as a parameter. As we know that there can be multiple test environment and not necessarily we would need to run our tests on 1 environment. So to avaoid changing the code, testnow provides exposure of test url.
-
+This variable currently only works if you create a framework from testnow command line tool. This variable is called __TEST_URL__ and it gives you the power to pass the test url as a parameter. As we know that there can be multiple test environment and not necessarily we would need to run our tests on 1 environment. So to avaoid changing the code, testnow provides exposure of test url.   
+    
 For Example:
 ```
 rake testnow BROWSER=chrome TEST_URL=https://github.com
-```
+```   
+   
+### <a name="device"></a> 3. DEVICE
+This variable is only required when using Chrome Mobile emulation browser. This is a feature by Google Chrome provided for testing mobile websites how it will look on chrome browser on various devices. For eg: Google Chrome on Apple iPhone 6 Plus or Google Chrome on Samsung Galaxy Note 3. The list of devices can be found on [here](https://developers.google.com/web/tools/chrome-devtools/device-mode/). Now coming back to how to use this variable. We need to pass the DEVICE name when choosing BROWSER=mobilechrome.  
+  
+For example
+```   
+rake testnow BROWSER=mobile_chrome DEVICE="Apple iPhone 6"   
+or   
+rake testnow BROWSER=chrome_mobile DEVICE="Samsung Galaxy Note 3"  
+or  
+rake testnow BROWSER="Mobile Chrome" DEVICE=Google_Nexus_6
+```   
+ __Note: If certain devices are not found on your chrome then firstly update your chrome to latest version and then turn on the devices and device mode from developer tools options__
+
+
 
 ## Browsers  
 As mentioned in the above section that there is a variable exposed called _BROWSER_ but what are the values to be passed and which OS-Browsers combinations are supported, well here is a index grid below:
 
 | OS  | Chrome  | Firefox (v47-)  | Firefox Gecko (v48+)  | IE 11/10   | Edge  | Opera  | PhantomJS   | Chrome Mobile[2]   |    
 |---|---|---|---|---|---|---|---|---|    
-| Linux     | Supported  | Supported  | Supported  | N/A         | N/A         | Supported[1]  | Coming Soon!  | Coming Soon!  |   
-| Mac       | Supported  | Supported  | Supported  | N/A         | N/A         | Supported[1]  | Coming Soon!  | Coming Soon!  |     
-| Windows   | Supported  | Supported  | Supported  | Supported   | Supported[3]| Coming Soon!  | Coming Soon!  | Coming Soon!  |    
+| Linux     | Supported  | Supported  | Supported  | N/A         | N/A         | Supported[1]  | Coming Soon!  | Supported  |   
+| Mac       | Supported  | Supported  | Supported  | N/A         | N/A         | Supported[1]  | Coming Soon!  | Supported  |     
+| Windows   | Supported  | Supported  | Supported  | Supported   | Supported[3]| Coming Soon!  | Coming Soon!  | Supported  |    
   
 Note:  
 [1] Currently it is expected that the Opera webdriver binary is present inside "/usr/local/bin/operadriver, soon this path will be made customizable and exposaed as a varibale.   
