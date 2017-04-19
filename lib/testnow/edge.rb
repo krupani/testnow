@@ -3,10 +3,9 @@ class MicrosoftEdge
   @private
   def pre_config
     @client = Selenium::WebDriver::Remote::Http::Default.new
-    @client.timeout = 120
+    @client.read_timeout = 120
     @caps = Selenium::WebDriver::Remote::Capabilities.edge(:native_events => false,
                                                            :acceptSslCerts => true)
-
   end
 
   @private
@@ -25,11 +24,12 @@ class MicrosoftEdge
   end
 
   def launch_watir_edge
-    self.edge_config
+    self.pre_config
     browser = Watir::Browser.new(:edge,
                                  :desired_capabilities => @caps,
                                  :http_client => @client)
-    self.post_edge_config(browser.driver)
+    self.post_config(browser.driver)
     return browser
   end
+
 end

@@ -1,34 +1,38 @@
 class Opera
 
 	@private
-	def opera_config
-	  	@client = Selenium::WebDriver::Remote::Http::Default.new
-	  	@client.timeout = 180 # seconds
-	  	@service = Selenium::WebDriver::Chrome::Service.new("/usr/local/bin/operadriver", 48923)
-	  	@service.start
-	  	@cap = Selenium::WebDriver::Remote::Capabilities.chrome('operaOptions' => {'binary' => "#{get_binary_path}", 'args' => ["--ignore-certificate-errors"]})
+	def pre_config
+		@client = Selenium::WebDriver::Remote::Http::Default.new
+		@client.read_timeout = 180 # seconds
+		@service = Selenium::WebDriver::Chrome::Service.new("/usr/local/bin/operadriver", 48923, {})
+		@service.start
+		@cap = Selenium::WebDriver::Remote::Capabilities.chrome('operaOptions' => {'binary' => "#{get_binary_path}", 'args' => ["--ignore-certificate-errors"]})
+	end
+
+  @private
+  def post_config(driver)
+		driver.manage.timeouts.implicit_wait = 30
+		driver.manage.window.maximize
+		driver.manage.timeouts.page_load = 120
 	end
 
 	# Opera browser
 	def launch_driver_opera
-		self.opera_config
-	  	@driver = Selenium::WebDriver.for(:remote, :url => @service.uri, :desired_capabilities => @cap, :http_client => @client)
-	  	@driver.manage.timeouts.implicit_wait = 30
-	  	@driver.manage.window.maximize
-	  	@driver.manage.timeouts.page_load = 120
-	  	return @driver
+		self.pre_config
+		driver = Selenium::WebDriver.for(:remote, :url => @service.uri, :desired_capabilities => @cap, :http_client => @client)
+		self.post_config(driver)
+		return driver
 	end
 
+	# Opera browser
 	def launch_watir_opera
-		self.opera_config
+		self.pre_config
 		browser = Watir::Browser.new(:remote, :url => @service.uri, :desired_capabilities => @cap, :http_client => @client)
-		browser.driver.manage.timeouts.implicit_wait = 30
-	  	browser.driver.manage.window.maximize
-	  	browser.driver.manage.timeouts.page_load = 120
-	  	return browser
+		self.post_config(browser.driver)
+		return browser
 	end
 
-
+	@private
 	def get_binary_path
 		case RUBY_PLATFORM
 			when /mswin|msys|mingw|cygwin|bccwin|wince|emc/

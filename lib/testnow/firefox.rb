@@ -3,7 +3,7 @@ class Firefox
 
   #Firefox browser
   def launch_driver_firefox
-    caps = Selenium::WebDriver::Remote::Capabilities.firefox(marionette: false)
+    caps = Selenium::WebDriver::Remote::Capabilities.firefox(:marionette => false)
     ENV['IS_UPA'] = "false" if ENV['IS_UPA'].nil?
     if ENV['IS_UPA']=="true"
       ENV['HAR_DIR'] = get_tmp_dir if ENV['HAR_DIR'].nil?
@@ -44,7 +44,7 @@ class Firefox
   end
 
   def launch_watir_firefox
-    caps = Selenium::WebDriver::Remote::Capabilities.firefox(marionette: false)
+    caps = Selenium::WebDriver::Remote::Capabilities.firefox(:marionette => false)
     browser = Watir::Browser.new(:firefox, :desired_capabilities => caps)
     browser.driver.manage.timeouts.implicit_wait = 30
     browser.driver.manage.timeouts.page_load = 120
