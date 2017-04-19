@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
 	s.executables 	= 'testnow'
 	s.homepage			=	'https://github.com/krupani/testnow'
 	s.license				= 'MIT'
+	s.required_ruby_version = '~> 2'
 	s.add_runtime_dependency('bundler', '~>1')
 	s.add_development_dependency('selenium-webdriver', '~>3')
 	s.add_development_dependency('watir-webdriver', '>=0.9')
