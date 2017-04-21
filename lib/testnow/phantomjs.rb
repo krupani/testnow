@@ -8,13 +8,13 @@ class PhantomJS
   end
 
   def launch_driver_phantomjs
-    driver = Selenium::WebDriver.for :phantomjs
+    driver = Selenium::WebDriver.for(:phantomjs)
     self.post_config(driver)
     return driver
   end
 
   def launch_watir_phantomjs
-    browser = Watir::Browser.new :chrome
+    browser = Watir::Browser.new(:phantomjs)
     self.post_config(browser.driver)
     return browser
   end

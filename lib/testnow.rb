@@ -5,6 +5,7 @@ require 'testnow/android_chrome'
 require 'testnow/ie'
 require 'testnow/edge'
 require 'testnow/firefox_gecko'
+require 'testnow/phantomjs'
 
 module TestNow
 
@@ -30,8 +31,8 @@ module TestNow
         firefox_gecko = FirefoxGecko.new
         firefox_gecko.launch_driver_firefox_gecko
       when "phantomjs"
-        puts "Coming Soon!!\n"
-        puts "Apologies for inconvenience...\n\n"
+        phantomjs = PhantomJS.new
+        phantomjs.launch_driver_phantomjs
       when "chromemobile","mobilechrome"
         chrome = Chrome.new
         chrome.launch_driver_chrome_mobile
@@ -63,6 +64,9 @@ module TestNow
         when "firefoxgecko","geckofirefox","firefoxnew","newfirefox","firefox"
           firefox_gecko = FirefoxGecko.new
           firefox_gecko.launch_watir_firefox_gecko
+        when "phantomjs"
+          phantomjs = PhantomJS.new
+          phantomjs.launch_watir_phantomjs
         when "chromemobile","mobilechrome"
           chrome = Chrome.new
           chrome.launch_watir_chrome_mobile
