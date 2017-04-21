@@ -140,6 +140,7 @@ def rspec_now(framework="cucumber")
     @base = "rspec_now"
   end
   @root_dir = File.join(FileUtils.pwd, @base)
+  @lib_dir = File.join(@root_dir ,'lib')
   @spec_dir = File.join(@root_dir, "spec")
   @scenario_dir = File.join(@spec_dir, "scenarios")
   @pages_dir = File.join(@root_dir, "pages")
@@ -162,6 +163,9 @@ def rspec_now(framework="cucumber")
   print "Creating project directory."
   FileUtils.makedirs(@root_dir)
 
+  print "Creating lib directory to contain test page."
+  FileUtils.makedirs(@lib_dir)
+
   print "Creating spec directory."
   FileUtils.makedirs(@spec_dir)
 
@@ -171,6 +175,9 @@ def rspec_now(framework="cucumber")
   print "Creating the page directory just in case if you want to use page object pattern."
   FileUtils.makedirs(@pages_dir)
 
+  print "Creating test page file inside lib directory."
+  FileUtils.copy(@showtime_dir+"/test_page/testnow_form.html", @lib_dir)
+
   if framework == "watir"
     print "Creating config file -- spec_helper.rb -- used for dependency declaration and global setup-teardown"
     FileUtils.copy(@showtime_dir+"/watir/spec_helper.rb", @spec_dir)
@@ -179,7 +186,7 @@ def rspec_now(framework="cucumber")
     FileUtils.copy(@showtime_dir+"/watir/Gemfile_rspec", @root_dir+"/Gemfile")
 
     print "Creating spec file inside the scenarios directory."
-    FileUtils.copy(@showtime_dir+"/watir/github_spec.rb", @scenario_dir)
+    FileUtils.copy(@showtime_dir+"/watir/testnow_spec.rb", @scenario_dir)
 
     print "Creating page class file inside the pages directory."
     FileUtils.copy(@showtime_dir+"/watir/testnow_page.rb", @pages_dir)
@@ -191,7 +198,7 @@ def rspec_now(framework="cucumber")
     FileUtils.copy(@showtime_dir+"/Gemfile_rspec", @root_dir+"/Gemfile")
 
     print "Creating spec file inside the scenarios directory."
-    FileUtils.copy(@showtime_dir+"/github_spec.rb", @scenario_dir)
+    FileUtils.copy(@showtime_dir+"/testnow_spec.rb", @scenario_dir)
 
     print "Creating page class file inside the pages directory."
     FileUtils.copy(@showtime_dir+"/testnow_page.rb", @pages_dir)

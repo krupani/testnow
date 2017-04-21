@@ -7,7 +7,7 @@ Given(/^I am on the test page$/) do
 end
 
 When(/^I fill following data:$/) do |table|
-  @data = table.raw
+  @data = table.hashes
   testnow = TestNowPage.new(@driver)
   testnow.fill_form_data(@data)
 end
@@ -18,33 +18,16 @@ And(/^I submit the form$/) do
 end
 
 Then(/^I verify n accept the validation alert$/) do
-  if ENV['BROWSER'].downcase!='phantomjs'
-    alert = @driver.switch_to.alert
-    expect(alert.text).to eq "Please accept terms to submit the data."
-    alert.accept
-  else
-    msg=@driver.execute_script("return window.msg")
-    expect(msg).to eq "Please accept terms to submit the data."
-  end
+  testnow = TestNowPage.new(@driver)
+  testnow.verify_n_accept_validation_alert
 end
 
 Then(/^I verify n accept the confirmation box$/) do
-  if ENV['BROWSER'].downcase!='phantomjs'
-    confirm = @driver.switch_to.alert
-    data = confirm.text
-    @data.each do |values|
-      expect(data).to include(values.last)
-    end
-    confirm.accept
-  else
-    msg=@driver.execute_script("return window.msg")
-    @data.each do |values|
-      expect(msg).to include(values.last)
-    end
-  end
+  testnow = TestNowPage.new(@driver)
+  testnow.verify_n_accept_confirmation(@data)
 end
 
 And(/^I verify the acknowledgement$/) do
   testnow = TestNowPage.new(@driver)
-  expect(testnow.header.text).to eq 'Thank you for using TestNow!!'
+  testnow.verify_acknowledgement
 end

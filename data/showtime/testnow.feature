@@ -7,9 +7,8 @@ Feature: As a TestNow user
     When I submit the form
     Then I verify n accept the validation alert
     When I fill following data:
-      | Name     | Kaushal Rupani |
-      | Role     | Automation     |
-      | Language | Ruby           |
+      | Name     | Role       | Language |
+      | Role     | Automation | Ruby     |
     And I submit the form
     Then I verify n accept the confirmation box
     And I verify the acknowledgement

@@ -16,22 +16,49 @@ class TestNowPage < WebObject
     @driver.get(ENV['TEST_URL'])
   end
 
+  def verify_n_accept_validation_alert
+    if ENV['BROWSER'].downcase!='phantomjs'
+      alert = @driver.switch_to.alert
+      expect(alert.text).to eq "Please accept terms to submit the data."
+      alert.accept
+    else
+      msg=@driver.execute_script("return window.msg")
+      expect(msg).to eq "Please accept terms to submit the data."
+    end
+  end
+
   def fill_form_data(data)
-    data.each do |value|
-      case value.first.downcase
+    data.each do |hash|
+      case hash.keys.first.downcase
         when "name"
-          name_field.send_keys(value.last)
+          name_field.send_keys(hash.values.last)
         when "role"
-          if value.last.downcase=="automation"
+          if hash.values.last.downcase=="automation"
             automation_radio.click
           else
             manual_radio.click
           end
         when "language"
           select = Selenium::WebDriver::Support::Select.new(language_dropdown)
-          select.select_by(:text, value.last)
+          select.select_by(:text, hash.values.last)
       end
       terms_checkbox.click
+    end
+  end
+
+  def verify_n_accept_confirmation(expected)
+    if ENV['BROWSER'].downcase!='phantomjs'
+      confirm = @driver.switch_to.alert
+      data = confirm.text
+      expected.each do |hash|
+        expect(data).to include(hash.values.last)
+      end
+      confirm.accept
+    else
+      msg=@driver.execute_script("return window.msg")
+      expected.each do |hash|
+        expect(msg).to include(hash.values.last)
+      end
     end
   end
 
@@ -41,6 +68,10 @@ class TestNowPage < WebObject
       @driver.execute_script("window.confirm = function(msg){window.msg=msg;return true;};")
     end
     submit_button.click
+  end
+
+  def verify_acknowledgement
+    expect(header.text).to eq 'Thank you for using TestNow!!'
   end
 
 end
