@@ -7,7 +7,7 @@ describe "As a github user, my public profile" do
 	end
 
 	it "should display my name" do
-		git = GithubPage.new(@browser)
+		git = TestnowPage.new(@browser)
 		git.search_github("Kaushal Rupani")
 		git.click_tab("Users")
 		git.verify_text_presence("Kaushal")

@@ -12,7 +12,7 @@ def cucumber_now(framework="cucumber")
     @base = "cucumber_now"
   end
   @root_dir = File.join(FileUtils.pwd, @base)
-  @lib_dir = File.join(@root_dir,'lib')
+  @lib_dir = File.join(@root_dir ,'lib')
   @feature_dir = File.join(@root_dir,'features')
   @scenario_dir = File.join(@feature_dir, 'scenarios')
   @steps_dir = File.join(@feature_dir,'step_definition')
@@ -112,7 +112,7 @@ def cucumber_now(framework="cucumber")
     system("bundle install --gemfile=$(pwd)/#{@base}/Gemfile")
     print "Dependency installation completed successfully.\n\n"
   else
-    print "You can do this later also. Just cd into cucumber_now directory and run 'bundle install'\n\n"
+    print "You can do this later also. Just cd into #{@base} directory and run 'bundle install'\n\n"
     exit 1
   end
 
