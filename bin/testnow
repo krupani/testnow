@@ -12,6 +12,7 @@ def cucumber_now(framework="cucumber")
     @base = "cucumber_now"
   end
   @root_dir = File.join(FileUtils.pwd, @base)
+  @lib_dir = File.join(@root_dir,'lib')
   @feature_dir = File.join(@root_dir,'features')
   @scenario_dir = File.join(@feature_dir, 'scenarios')
   @steps_dir = File.join(@feature_dir,'step_definition')
@@ -37,6 +38,9 @@ def cucumber_now(framework="cucumber")
   print "Creating project directory."
   FileUtils.makedirs(@root_dir)
 
+  print "Creating lib directory to contain test page."
+  FileUtils.makedirs(@lib_dir)
+
   print "Creating features directory."
   FileUtils.makedirs(@feature_dir)
 
@@ -55,8 +59,11 @@ def cucumber_now(framework="cucumber")
   print "Creating the reports directory where the reports will be save after execution."
   FileUtils.makedirs(@report_dir)
 
+  print "Creating test page file inside lib directory."
+  FileUtils.copy(@showtime_dir+"/test_page/testnow_form.html", @lib_dir)
+
   print "Creating feature file inside scenarios directory."
-  FileUtils.copy(@showtime_dir+"/github.feature", @scenario_dir)
+  FileUtils.copy(@showtime_dir+"/testnow.feature", @scenario_dir)
 
   if framework == "watir"
     print "Creating config files -- hooks.rb -- used for setup and teardown purpose."
@@ -65,10 +72,10 @@ def cucumber_now(framework="cucumber")
     FileUtils.copy(@showtime_dir+"/watir/env.rb", @support_dir)
 
     print "Creating step definition file inside the steps directory"
-    FileUtils.copy(@showtime_dir+"/watir/github_steps.rb", @steps_dir)
+    FileUtils.copy(@showtime_dir+"/watir/testnow_steps.rb", @steps_dir)
 
     print "Creating page class file inside the page directory."
-    FileUtils.copy(@showtime_dir+"/watir/github_page.rb", @page_dir)
+    FileUtils.copy(@showtime_dir+"/watir/testnow_page.rb", @page_dir)
 
     print "Creating Gemfile -- used to contain all required gems information."
     FileUtils.copy(@showtime_dir+"/watir/Gemfile", @root_dir)
@@ -79,10 +86,10 @@ def cucumber_now(framework="cucumber")
     FileUtils.copy(@showtime_dir+"/env.rb", @support_dir)
 
     print "Creating step definition file inside the steps directory"
-    FileUtils.copy(@showtime_dir+"/github_steps.rb", @steps_dir)
+    FileUtils.copy(@showtime_dir+"/testnow_steps.rb", @steps_dir)
 
     print "Creating page class file inside the page directory."
-    FileUtils.copy(@showtime_dir+"/github_page.rb", @page_dir)
+    FileUtils.copy(@showtime_dir+"/testnow_page.rb", @page_dir)
 
     print "Creating Gemfile -- used to contain all required gems information."
     FileUtils.copy(@showtime_dir+"/Gemfile", @root_dir)
@@ -175,7 +182,7 @@ def rspec_now(framework="cucumber")
     FileUtils.copy(@showtime_dir+"/watir/github_spec.rb", @scenario_dir)
 
     print "Creating page class file inside the pages directory."
-    FileUtils.copy(@showtime_dir+"/watir/github_page.rb", @pages_dir)
+    FileUtils.copy(@showtime_dir+"/watir/testnow_page.rb", @pages_dir)
   else
     print "Creating config file -- spec_helper.rb -- used for dependency declaration and global setup-teardown"
     FileUtils.copy(@showtime_dir+"/spec_helper.rb", @spec_dir)
@@ -187,7 +194,7 @@ def rspec_now(framework="cucumber")
     FileUtils.copy(@showtime_dir+"/github_spec.rb", @scenario_dir)
 
     print "Creating page class file inside the pages directory."
-    FileUtils.copy(@showtime_dir+"/github_page.rb", @pages_dir)
+    FileUtils.copy(@showtime_dir+"/testnow_page.rb", @pages_dir)
   end
 
   print "Creating Rakefile -- used to write automation execution tasks."
@@ -223,7 +230,7 @@ end
 
 def print(msg)
   puts "\n"
-  puts "=>=>=> " + msg
+  puts "=>=> " + msg
   sleep 0.5
 end
 

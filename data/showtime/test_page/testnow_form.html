@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Testnow Form</title>
+</head>
+<body>
+<h1 id="header">TestNow Form</h1>
+<div id="thanks"></div>
+<form name="testnow-form" style="display:block">
+    Name:<br>
+    <input type="text" id="name">
+    <br><br>
+    Role as a QA:<br>
+    <input type="radio" name="qa" value="Manual"> Manual <br>
+    <input type="radio" name="qa" value="Automation"> Automation
+    <br><br>
+    WebDriver Language:<br>
+    <select name="lang" id="lang">
+        <option value="" selected>Select Language</option>
+        <option value="Ruby">Ruby</option>
+        <option value="Java">Java</option>
+        <option value="Python">Python</option>
+        <option value="C#">C#</option>
+        <option value="Java Script">Java Script</option>
+        <option value="PHP">PHP</option>
+    </select>
+    <br><br>
+    <input type="checkbox" id="terms"> I Agree
+    <br><br>
+    <input type="button" value="Submit" id="button" />
+    <br><br><br><h2>Kaushal Rupani (<a href="https://github.com/krupani" target="_blank">Github</a>)</h2>
+</form>
+
+<script>
+    document.getElementById('button').addEventListener('click', function(){
+        var checkTerms = document.getElementById('terms').checked;
+        if (checkTerms) {
+            var name=document.getElementById('name').value;
+            var qa=document.getElementsByName('qa');
+            var lang=document.getElementById('lang').value;
+            for (var i = 0, length = qa.length; i < length; i++) {
+                if (qa[i].checked) {
+                    var qa_eng=qa[i].value;
+                    break;
+                }
+            }
+
+            var ans = confirm("\nYou are submitting the following:\n\nName: "+name+"\nRole: "+qa_eng+"\nWebDriver Language: "+lang+"\n\nAre you sure you want to continue?");
+            if (ans == true) {
+                document.getElementsByName('testnow-form')[0].setAttribute("style",'display:none');
+                document.getElementById('header').innerHTML = "Thank you for using TestNow!!";
+
+                var thanks = '<br><h3>Some Important Links</h3>';
+                thanks += '<br><h2><a href="https://rubygems.org/gems/testnow" target="_blank">TestNow Gem</a>';
+                thanks += '<br><br><a href="https://github.com/krupani/testnow" target="_blank">TestNow source</a>';
+                thanks += '<br><br><a href="https://rubygems.org/gems/web-object" target="_blank">Web-Object Gem</a>';
+                thanks += '<br><br><a href="https://github.com/krupani/web-object" target="_blank">Web-Object source</a>';
+                thanks += '<br><br><br>Kaushal Rupani (<a href="https://github.com/krupani" target="_blank">Github</a>)</h2>';
+
+                document.getElementById('thanks').innerHTML = thanks;
+            }
+
+        } else {
+            alert('Please accept terms to submit the data.');
+        }
+    });
+</script>
+
+</body>
+</html>

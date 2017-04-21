@@ -5,7 +5,7 @@ class GithubPage
   end
 
   def search_github(key)
-    @browser.goto(@browser.driver.current_url+"/search?q=#{key}")
+    @browser.goto(ENV['TEST_URL']+"/search?q=#{key}")
   end
 
   def click_tab(tab)
