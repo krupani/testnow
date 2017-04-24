@@ -11,8 +11,7 @@ class TestNowPage < WebObject
   element :submit_button, {id: 'button'}
 
   def visit_page
-    path = File.absolute_path('testnow_form.html','lib')
-    ENV['TEST_URL'] = "file://#{path}" if ENV['TEST_URL'].nil?
+    ENV['TEST_URL'] = "http://krupani.github.io/testnow_form" if ENV['TEST_URL'].nil?
     @driver.get(ENV['TEST_URL'])
   end
 

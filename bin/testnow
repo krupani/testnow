@@ -12,7 +12,6 @@ def cucumber_now(framework="cucumber")
     @base = "cucumber_now"
   end
   @root_dir = File.join(FileUtils.pwd, @base)
-  @lib_dir = File.join(@root_dir ,'lib')
   @feature_dir = File.join(@root_dir,'features')
   @scenario_dir = File.join(@feature_dir, 'scenarios')
   @steps_dir = File.join(@feature_dir,'step_definition')
@@ -38,9 +37,6 @@ def cucumber_now(framework="cucumber")
   print "Creating project directory."
   FileUtils.makedirs(@root_dir)
 
-  print "Creating lib directory to contain test page."
-  FileUtils.makedirs(@lib_dir)
-
   print "Creating features directory."
   FileUtils.makedirs(@feature_dir)
 
@@ -58,9 +54,6 @@ def cucumber_now(framework="cucumber")
 
   print "Creating the reports directory where the reports will be save after execution."
   FileUtils.makedirs(@report_dir)
-
-  print "Creating test page file inside lib directory."
-  FileUtils.copy(@showtime_dir+"/test_page/testnow_form.html", @lib_dir)
 
   print "Creating feature file inside scenarios directory."
   FileUtils.copy(@showtime_dir+"/testnow.feature", @scenario_dir)
@@ -140,7 +133,6 @@ def rspec_now(framework="cucumber")
     @base = "rspec_now"
   end
   @root_dir = File.join(FileUtils.pwd, @base)
-  @lib_dir = File.join(@root_dir ,'lib')
   @spec_dir = File.join(@root_dir, "spec")
   @scenario_dir = File.join(@spec_dir, "scenarios")
   @pages_dir = File.join(@root_dir, "pages")
@@ -163,9 +155,6 @@ def rspec_now(framework="cucumber")
   print "Creating project directory."
   FileUtils.makedirs(@root_dir)
 
-  print "Creating lib directory to contain test page."
-  FileUtils.makedirs(@lib_dir)
-
   print "Creating spec directory."
   FileUtils.makedirs(@spec_dir)
 
@@ -174,9 +163,6 @@ def rspec_now(framework="cucumber")
 
   print "Creating the page directory just in case if you want to use page object pattern."
   FileUtils.makedirs(@pages_dir)
-
-  print "Creating test page file inside lib directory."
-  FileUtils.copy(@showtime_dir+"/test_page/testnow_form.html", @lib_dir)
 
   if framework == "watir"
     print "Creating config file -- spec_helper.rb -- used for dependency declaration and global setup-teardown"

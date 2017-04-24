@@ -16,8 +16,7 @@ class TestNowPage < WebObject
   end
 
   def visit_page
-    path = File.absolute_path('testnow_form.html','lib')
-    ENV['TEST_URL'] = "file://#{path}" if ENV['TEST_URL'].nil?
+    ENV['TEST_URL'] = "http://krupani.github.io/testnow_form" if ENV['TEST_URL'].nil?
     @browser.goto(ENV['TEST_URL'])
     expect(@browser.title).to eq 'Testnow Form'
     expect(header.text).to eq 'TestNow Form'
