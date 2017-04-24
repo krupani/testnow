@@ -27,36 +27,36 @@ class TestNowPage < WebObject
   end
 
   def fill_form_data(data)
-    data.each do |hash|
-      case hash.keys.first.downcase
+    data.each do |key,value|
+      case key.downcase
         when "name"
-          name_field.send_keys(hash.values.last)
+          name_field.send_keys(value)
         when "role"
-          if hash.values.last.downcase=="automation"
+          if value.downcase=="automation"
             automation_radio.click
           else
             manual_radio.click
           end
         when "language"
           select = Selenium::WebDriver::Support::Select.new(language_dropdown)
-          select.select_by(:text, hash.values.last)
+          select.select_by(:text, value)
       end
-      terms_checkbox.click
     end
+    terms_checkbox.click
   end
 
   def verify_n_accept_confirmation(expected)
     if ENV['BROWSER'].downcase!='phantomjs'
       confirm = @driver.switch_to.alert
       data = confirm.text
-      expected.each do |hash|
-        expect(data).to include(hash.values.last)
+      expected.values.each do |val|
+        expect(data).to include(val)
       end
       confirm.accept
     else
       msg=@driver.execute_script("return window.msg")
-      expected.each do |hash|
-        expect(msg).to include(hash.values.last)
+      expected.values.each do |val|
+        expect(msg).to include(val)
       end
     end
   end

@@ -7,7 +7,7 @@ Given(/^I am on the test page$/) do
 end
 
 When(/^I fill following data:$/) do |table|
-  @data = table.hashes
+  @data = table.hashes.first
   testnow = TestNowPage.new(@driver)
   testnow.fill_form_data(@data)
 end

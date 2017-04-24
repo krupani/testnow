@@ -11,7 +11,7 @@ describe "As a TestNow user, I want to submit my professional data" do
 		testnow = TestNowPage.new(@browser)
 		testnow.submit_form
 		testnow.verify_n_accept_validation_alert
-		data=([{'Name'=>'Kaushal Rupani'},{'Role'=>'Automation'},{'Language'=>'Ruby'}])
+		data={'Name'=>'Kaushal Rupani', 'Role'=>'Automation', 'Language'=>'Ruby'}
 		testnow.fill_form_data(data)
 		testnow.submit_form
 		testnow.verify_n_accept_confirmation(data)
