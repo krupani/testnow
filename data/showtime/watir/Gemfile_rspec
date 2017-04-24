@@ -1,8 +1,7 @@
 source "http://rubygems.org"
 gem 'selenium-webdriver'
-gem 'cucumber'
 gem 'rspec'
 gem 'rake'
 gem 'testnow'
-gem 'watir-webdriver'
+gem 'watir'
 gem 'web-object'

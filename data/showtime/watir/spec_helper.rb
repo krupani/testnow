@@ -2,7 +2,7 @@ require 'rspec'
 require 'selenium-webdriver'
 require 'rake'
 require 'testnow'
-require 'watir-webdriver'
+require 'watir'
 require 'web-object'
 
 include RSpec::Matchers
