@@ -17,7 +17,7 @@ AfterStep do
   begin
     capture_n_embed
   rescue
-    p "*** Could Not take screenshot ***"
+    # Do nothing, screenshot fails in cases of alerts
   end
 end
 
