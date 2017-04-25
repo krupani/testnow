@@ -29,16 +29,20 @@ An instant WebDriver-Ruby-Cucumber or WebDriver-Ruby-RSpec framework which has a
 
 ## Installation  
 There are multiple ways in which you can install and use testnow gem.
-You must have Ruby installed before you can install this gem.   
+You must have Ruby(>2.0) installed before you can install this gem.   
 
 ### <a name="gem" /> 1. Install using gem command
-Just use following command from you Terminal.
+Just use following command from you Terminal.   
+Usually installing testnow using gem command is always advised in cases of creating a new framework from scratch.   
+For existing framework, see next section (Install using bundler).   
 ``` 
 gem install testnow 
 ```
    
 ### <a name="bundler" /> 2. Install using bundler    
-You can include it in your Gemfile and run bundle install
+You can include it in your Gemfile and run bundle install.   
+This is the preferred way to do it incase of adding testnow to an existing framework.   
+To create a new framework from scratch, there would be no Gemfile, then please install testnow using gem command (Previous section).   
 
 ``` 
 gem 'testnow' 
@@ -195,11 +199,11 @@ rake testnow BROWSER="Mobile Chrome" DEVICE=Google_Nexus_6
 ## Browsers  
 As mentioned in the above section that there is a variable exposed called _BROWSER_ but what are the values to be passed and which OS-Browsers combinations are supported, well here is a index grid below:
 
-| OS  | Chrome  | Firefox (v47-)  | Firefox Gecko (v48+)  | IE 11/10   | Edge  | Opera  | PhantomJS   | Chrome Mobile[2]   |    
+| OS  | Chrome  | Firefox (v47-)  | Firefox Gecko (v48+)  | IE 11/10   | Edge  | Opera  | PhantomJS   | Chrome Mobile[2] |    
 |---|---|---|---|---|---|---|---|---|    
-| Linux     | Supported  | Supported  | Supported  | N/A         | N/A         | Supported[1]  | Coming Soon!  | Supported  |   
-| Mac       | Supported  | Supported  | Supported  | N/A         | N/A         | Supported[1]  | Coming Soon!  | Supported  |     
-| Windows   | Supported  | Supported  | Supported  | Supported   | Supported[3]| Coming Soon!  | Coming Soon!  | Supported  |    
+| Linux     | Supported  | Supported  | Supported  | N/A         | N/A         | Supported[1]  | Supported  | Supported  |   
+| Mac       | Supported  | Supported  | Supported  | N/A         | N/A         | Supported[1]  | Supported  | Supported  |     
+| Windows   | Supported  | Supported  | Supported  | Supported   | Supported[3]| Coming Soon!  | Supported  | Supported  |    
   
 Note:  
 [1] Currently it is expected that the Opera webdriver binary is present inside "/usr/local/bin/operadriver, soon this path will be made customizable and exposaed as a varibale.   
