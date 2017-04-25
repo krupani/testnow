@@ -3,7 +3,8 @@ require 'selenium-webdriver'
 require 'cucumber'
 require 'rake'
 require 'testnow'
-require 'watir-webdriver'
+require 'watir'
+require 'web-object'
 
 include RSpec::Matchers
 include TestNow::Watir

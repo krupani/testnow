@@ -1,1 +1,1 @@
-default: --require features --no-source --color --format pretty --format html --out reports/github_report.html --format json --out reports/github_report.json
+default: --require features --no-source --color --format pretty --format html --out reports/testnow_report.html --format json --out reports/testnow_report.json
