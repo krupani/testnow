@@ -199,18 +199,26 @@ rake testnow BROWSER="Mobile Chrome" DEVICE=Google_Nexus_6
 ## Browsers  
 As mentioned in the above section that there is a variable exposed called _BROWSER_ but what are the values to be passed and which OS-Browsers combinations are supported, well here is a index grid below:
 
-| OS  | Chrome  | Firefox (v47-)  | Firefox Gecko (v48+)  | IE 11/10   | Edge  | Opera  | PhantomJS   | Chrome Mobile[2] |    
-|---|---|---|---|---|---|---|---|---|    
-| Linux     | Supported  | Supported  | Supported  | N/A         | N/A         | Supported[1]  | Supported  | Supported  |   
-| Mac       | Supported  | Supported  | Supported  | N/A         | N/A         | Supported[1]  | Supported  | Supported  |     
-| Windows   | Supported  | Supported  | Supported  | Supported   | Supported[3]| Coming Soon!  | Supported  | Supported  |    
-  
+
+| :point_down: Browsers :left_right_arrow: OS :point_right: | Linux | Mac | Windows |  
+|---|---|---|---|    
+| Google Chrome | Supported | Supported | Supported |    
+| Mozilla Firefox(v47-) | Supported | Supported | Supported |    
+| Mozilla Firefox Gecko(v48+) | Supported | Supported | Supported |    
+| Internet Explorer 10/11 | N/A | N/A | Supported |    
+| Microsoft Edge | N/A | N/A | Supported[3] |    
+| Opera | Supported[1] | Supported[1] | Coming Soon!! |    
+| PhantomJS | Supported | Supported | Supported |    
+| Chrome Mobile Emulation[2] | Supported | Supported | Supported |    
+| Chrome on Android Phones/Emulators[4] | Supported | Supported | Supported |    
+
 Note:  
 [1] Currently it is expected that the Opera webdriver binary is present inside "/usr/local/bin/operadriver, soon this path will be made customizable and exposaed as a varibale.   
 [2] This is not another browser, it is the mobile emulation which Google Chrome proovides through its developer tools.   
-[3] Please download the required Microsoft WebDriver as per your windows 10 build number. Windows 10 build can be checked with the `winver` command.   
+[3] Please download the required Microsoft WebDriver as per your windows 10 build number. Windows 10 build can be checked with the `winver` command.  
+[4] In this case, there should be an android phone/emulator with google chrome installed connected to system via adb.   
 
-## Contributing
+## Contributing   
 Ideas and suggestions are always always most welcome. Please fork this gem code and feel free to add any updates, suggestions etc and create a pull request.  
 
 ## Issues
