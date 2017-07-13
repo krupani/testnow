@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 	s.email					=	'kushrupani@live.com'
 	s.files					=	Dir.glob("{lib,data}/**/*") + %w(README.md LICENCE)
 	s.test_files  	= `git ls-files -- {spec,features}/*`.split("\n") + %w(Rakefile)
-	s.executables 	= 'testnow'
+	s.executables 	<< 'testnow'
 	s.homepage			=	'https://github.com/krupani/testnow'
 	s.license				= 'MIT'
 	s.required_ruby_version = '~> 2'
